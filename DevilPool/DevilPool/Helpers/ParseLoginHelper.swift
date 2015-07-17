@@ -52,6 +52,26 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                 if let fbUsername = result?["name"] as? String {
                     // assign Facebook name to PFUser
                     println("Hello " + fbUsername)
+                    
+                    let facebookID: String = result?["id"] as! String
+                    let pictureURL = "https://graph.facebook.com/\(facebookID)/picture?type=large&return_ssl_resources=1"
+                    
+                    var URLRequest = NSURL(string: pictureURL)
+                    var URLRequestNeeded = NSURLRequest(URL: URLRequest!)
+                    
+                    NSURLConnection.sendAsynchronousRequest(URLRequestNeeded, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!, error: NSError!) -> Void in
+                        if error == nil {
+                            var picture = PFFile(data: data)
+                            user.setObject(picture, forKey: "profilePicture")
+                            user.saveInBackground()
+                        }
+                        else {
+                            println("Error: \(error.localizedDescription)")
+                        }
+                    })
+                    
+                    
+                    
                     user.username = fbUsername
                     // store PFUser
                     user.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in
