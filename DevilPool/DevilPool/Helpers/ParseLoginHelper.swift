@@ -33,9 +33,10 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
     
     
     func logInViewController(logInController: PFLogInViewController, didLogInUser user: PFUser) {
+        println("Hi i'm called")
         // Determine if this is a Facebook login
         let isFacebookLogin = FBSDKAccessToken.currentAccessToken() != nil
-        
+        println("Checking obj ID")
         if !isFacebookLogin {
             // Plain parse login, we can return user immediately
             self.callback(user, nil)
@@ -50,6 +51,7 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                 
                 if let fbUsername = result?["name"] as? String {
                     // assign Facebook name to PFUser
+                    println("Hello " + fbUsername)
                     user.username = fbUsername
                     // store PFUser
                     user.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) -> Void in

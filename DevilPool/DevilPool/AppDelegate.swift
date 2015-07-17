@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         parseLoginHelper = ParseLoginHelper {[unowned self] user, error in
             // Initialize the ParseLoginHelper with a callback
+            println("after callback")
             if let error = error {
                 // 1
                 
@@ -32,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if let user = user {
                 // if login was successful, display the TabBarController
                 // 2
+                print("log in successful!")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let viewController = storyboard.instantiateViewControllerWithIdentifier("HomeView") as! UIViewController
                 // 3
@@ -47,6 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         println("setting app id")
         Parse.setApplicationId("gtHkCYwo0dz39D4IHCvXP2Qla01l8uXSQ3OtzXMP", clientKey: "HOdrbc5lUHERw0hKd7B6BW2kA4PkkLYq1s3XO3r0")
         
+        //PFUser.logInWithUsername("test", password: "test")
+
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
         let user = PFUser.currentUser()
         let startViewController: UIViewController;
@@ -60,11 +65,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             startViewController = storyboard.instantiateViewControllerWithIdentifier("HomeView") as! UITabBarController
             
         } else {
+            println("No current user")
+            
+            let loginViewController = PFLogInViewController()
+            loginViewController.fields =  .Facebook
+            loginViewController.delegate = parseLoginHelper
+            
+            startViewController = loginViewController
+            
+            
             
             //No Current, user, direct to FB login View
-            println("no current user")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            startViewController = storyboard.instantiateViewControllerWithIdentifier("FacebookLogin") as! UIViewController
+            println("no current user asdfas")
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            startViewController = storyboard.instantiateViewControllerWithIdentifier("FacebookLogin") as! UIViewController
             
         }
         
@@ -95,7 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
     }
 
