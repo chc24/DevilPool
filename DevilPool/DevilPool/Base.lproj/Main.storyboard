@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Search-->
@@ -103,10 +104,10 @@
             </objects>
             <point key="canvasLocation" x="290" y="648"/>
         </scene>
-        <!--FacebookLogin-->
+        <!--Verify-->
         <scene sceneID="tky-2m-fPf">
             <objects>
-                <viewController storyboardIdentifier="FacebookLogin" id="2DI-bG-2ly" userLabel="FacebookLogin" customClass="FacebookLoginViewController" customModule="DevilPool" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Verify" id="2DI-bG-2ly" userLabel="Verify" customClass="VerifyViewController" customModule="DevilPool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dbL-gN-8y8"/>
                         <viewControllerLayoutGuide type="bottom" id="t39-LX-qig"/>
@@ -114,11 +115,27 @@
                     <view key="view" contentMode="scaleToFill" id="m5C-af-bRu">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUw-Ao-aSb">
+                                <rect key="frame" x="216" y="243" width="169" height="123"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="iBo-av-quZ"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="49e-Tb-3d3" kind="show" identifier="VerifyToHomeView" id="vnI-ah-apx"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="dbL-gN-8y8" secondAttribute="bottom" constant="223" id="bbL-T3-43C"/>
+                            <constraint firstItem="t39-LX-qig" firstAttribute="top" secondItem="oUw-Ao-aSb" secondAttribute="bottom" constant="234" id="eS0-C4-JnL"/>
+                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="leading" secondItem="m5C-af-bRu" secondAttribute="leadingMargin" constant="200" id="ukz-i4-Xgg"/>
+                        </constraints>
                     </view>
-                    <connections>
-                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="FBLoginToTabs" id="NBK-cG-fIs"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGH-yF-11v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

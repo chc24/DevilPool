@@ -36,6 +36,7 @@
 		C35735181B5971D100193580 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C357350B1B596DBD00193580 /* ParseUI.framework */; };
 		C35735191B59723100193580 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C357350A1B596DBD00193580 /* ParseFacebookUtilsV4.framework */; };
 		C357351A1B59728E00193580 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35735061B596DBD00193580 /* FBSDKShareKit.framework */; };
+		C35736231B59CC2E00193580 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35736221B59CC2E00193580 /* VerifyViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		C35735091B596DBD00193580 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		C357350A1B596DBD00193580 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		C357350B1B596DBD00193580 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		C35736221B59CC2E00193580 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 				C35733561B58461F00193580 /* PoolViewController.swift */,
 				C35733581B58463400193580 /* GearViewController.swift */,
 				C35733611B58650100193580 /* FacebookLoginViewController.swift */,
+				C35736221B59CC2E00193580 /* VerifyViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				C35733591B58463400193580 /* GearViewController.swift in Sources */,
 				C35733571B58461F00193580 /* PoolViewController.swift in Sources */,
 				C357330F1B5828FC00193580 /* AppDelegate.swift in Sources */,
+				C35736231B59CC2E00193580 /* VerifyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

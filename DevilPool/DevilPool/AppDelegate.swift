@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // 2
                 print("log in successful!")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = storyboard.instantiateViewControllerWithIdentifier("HomeView") as! UIViewController
+                let viewController = storyboard.instantiateViewControllerWithIdentifier("Verify") as! UIViewController
                 // 3
                 self.window?.rootViewController!.presentViewController(viewController, animated:true, completion:nil)
             }
