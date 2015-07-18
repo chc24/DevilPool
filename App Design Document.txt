@@ -55,5 +55,10 @@ Week of July 15
 -Add Email or SMS Verification ~ ~ Might be next week
 
 
+Weekend TODO:
+	-Finish Label / Profile picture connections
+	-customize loading screen
+	-Finalize Calender use
+	-figure out how to message and open from fb messenger
 
 
