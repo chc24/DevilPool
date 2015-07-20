@@ -1,0 +1,10 @@
+PODS:
+  - RSDayFlow (0.1.2)
+
+DEPENDENCIES:
+  - RSDayFlow (~> 0.1.2)
+
+SPEC CHECKSUMS:
+  RSDayFlow: c56d096cc5a3a630687104b0bc766f259abee881
+
+COCOAPODS: 0.38.0

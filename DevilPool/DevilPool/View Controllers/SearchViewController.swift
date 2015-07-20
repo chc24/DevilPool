@@ -10,6 +10,7 @@ import Parse
 import ParseUI
 import FBSDKCoreKit
 import UIKit
+import QuartzCore
 
 class SearchViewController: UIViewController {
 
@@ -22,10 +23,14 @@ class SearchViewController: UIViewController {
         displayName.text = PFUser.currentUser()!.username
         
         if let profileImage = PFUser.currentUser()?.valueForKey("profilePicture") as? PFFile {
+            
+            // TODO Add Local Storage for Profile Pictures.
             profileImage.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
                 if let data = data {
                     let image = UIImage(data: data, scale:1.0)!
+                    self.displayPicture.layer.masksToBounds = true
                     self.displayPicture.image = image
+                    self.displayPicture.layer.cornerRadius = self.displayPicture.frame.width/2
                 }
             }
         }

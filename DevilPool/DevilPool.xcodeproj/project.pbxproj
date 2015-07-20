@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113DF17C840FA912E6EBE839 /* libPods-DevilPool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */; };
 		C357330F1B5828FC00193580 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357330E1B5828FC00193580 /* AppDelegate.swift */; };
 		C35733161B5828FC00193580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35733141B5828FC00193580 /* Main.storyboard */; };
 		C35733181B5828FC00193580 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35733171B5828FC00193580 /* Images.xcassets */; };
@@ -37,6 +38,7 @@
 		C35735191B59723100193580 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C357350A1B596DBD00193580 /* ParseFacebookUtilsV4.framework */; };
 		C357351A1B59728E00193580 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35735061B596DBD00193580 /* FBSDKShareKit.framework */; };
 		C35736231B59CC2E00193580 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35736221B59CC2E00193580 /* VerifyViewController.swift */; };
+		C35736271B5D674F00193580 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C35736261B5D674F00193580 /* DatePickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DevilPool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8171C1E53AD988E30CE9235E /* Pods-DevilPool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevilPool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool.debug.xcconfig"; sourceTree = "<group>"; };
+		849F98DACFE571832FC6571F /* Pods-DevilPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevilPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool.release.xcconfig"; sourceTree = "<group>"; };
 		C35733091B5828FC00193580 /* DevilPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevilPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C357330D1B5828FC00193580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C357330E1B5828FC00193580 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +92,7 @@
 		C357350A1B596DBD00193580 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		C357350B1B596DBD00193580 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		C35736221B59CC2E00193580 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
+		C35736261B5D674F00193580 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,7 @@
 				C357334A1B5839AF00193580 /* SystemConfiguration.framework in Frameworks */,
 				C35733481B58399E00193580 /* MobileCoreServices.framework in Frameworks */,
 				C35733461B58398000193580 /* AudioToolbox.framework in Frameworks */,
+				113DF17C840FA912E6EBE839 /* libPods-DevilPool.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +133,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		389D0421D4B05443A5EE5CF5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8171C1E53AD988E30CE9235E /* Pods-DevilPool.debug.xcconfig */,
+				849F98DACFE571832FC6571F /* Pods-DevilPool.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C35733001B5828FC00193580 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +150,7 @@
 				C35733231B5828FC00193580 /* DevilPoolTests */,
 				C357330A1B5828FC00193580 /* Products */,
 				C35733191B5828FC00193580 /* LaunchScreen.xib */,
+				389D0421D4B05443A5EE5CF5 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -209,6 +226,7 @@
 				C35735091B596DBD00193580 /* ParseFacebookUtils.framework */,
 				C357350A1B596DBD00193580 /* ParseFacebookUtilsV4.framework */,
 				C357350B1B596DBD00193580 /* ParseUI.framework */,
+				2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -221,6 +239,7 @@
 				C35733581B58463400193580 /* GearViewController.swift */,
 				C35733611B58650100193580 /* FacebookLoginViewController.swift */,
 				C35736221B59CC2E00193580 /* VerifyViewController.swift */,
+				C35736261B5D674F00193580 /* DatePickerViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -240,9 +259,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C357332A1B5828FC00193580 /* Build configuration list for PBXNativeTarget "DevilPool" */;
 			buildPhases = (
+				44650137915EFEC6D9DC228F /* Check Pods Manifest.lock */,
 				C35733051B5828FC00193580 /* Sources */,
 				C35733061B5828FC00193580 /* Frameworks */,
 				C35733071B5828FC00193580 /* Resources */,
+				23A509C779A4B4D8153577FA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -328,6 +349,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		23A509C779A4B4D8153577FA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44650137915EFEC6D9DC228F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C35733051B5828FC00193580 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -337,6 +391,7 @@
 				C357335E1B584F1E00193580 /* ParseLoginHelper.swift in Sources */,
 				C35733621B58650100193580 /* FacebookLoginViewController.swift in Sources */,
 				C35733591B58463400193580 /* GearViewController.swift in Sources */,
+				C35736271B5D674F00193580 /* DatePickerViewController.swift in Sources */,
 				C35733571B58461F00193580 /* PoolViewController.swift in Sources */,
 				C357330F1B5828FC00193580 /* AppDelegate.swift in Sources */,
 				C35736231B59CC2E00193580 /* VerifyViewController.swift in Sources */,
@@ -467,6 +522,7 @@
 		};
 		C357332B1B5828FC00193580 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8171C1E53AD988E30CE9235E /* Pods-DevilPool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -476,7 +532,7 @@
 				);
 				INFOPLIST_FILE = DevilPool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DevilPool-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -485,6 +541,7 @@
 		};
 		C357332C1B5828FC00193580 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 849F98DACFE571832FC6571F /* Pods-DevilPool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -494,7 +551,7 @@
 				);
 				INFOPLIST_FILE = DevilPool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DevilPool-Bridging-Header.h";
 			};
