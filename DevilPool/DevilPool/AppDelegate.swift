@@ -68,6 +68,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("No current user")
             
             let loginViewController = PFLogInViewController()
+            
+//            var loginLogoTitle = UILabel()
+//            loginLogoTitle.text = "DevilPool"
+//            loginViewController.logInView!.logo = loginLogoTitle
+            
             loginViewController.fields =  .Facebook
             loginViewController.delegate = parseLoginHelper
             

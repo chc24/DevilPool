@@ -18,9 +18,47 @@ class SearchViewController: UIViewController, DatePickerDelegate {
     @IBOutlet weak var displayPicture: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     
+    @IBOutlet weak var fromTimeLabel: UITextField!
+    @IBOutlet weak var toTimeLabel: UITextField!
+    
+    
+    // Handle Repeat Code
+    
+    var tag = 0
+    
+    func makeDatePicker(sender: UITextField!) {
+        
+        var datePicker: UIDatePicker = UIDatePicker()
+        datePicker.datePickerMode = UIDatePickerMode.Time
+        sender.inputView = datePicker
+        datePicker.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    @IBAction func fromTimeLabelClicked(sender: UITextField!) {
+        tag = 1
+        makeDatePicker(sender)
+    }
+    @IBAction func toTimeLabel(sender: UITextField!) {
+        tag = 2
+        makeDatePicker(sender)
+    }
+    
+    func handleDatePicker(sender: UIDatePicker) {
+        var timeFormatter = NSDateFormatter()
+        timeFormatter.dateStyle = .NoStyle
+        timeFormatter.timeStyle = .ShortStyle
+        if tag == 1{
+            fromTimeLabel.text = timeFormatter.stringFromDate(sender.date)
+        }
+        else {
+            toTimeLabel.text = timeFormatter.stringFromDate(sender.date)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Display Facebook Name / Profile Picture
         displayName.text = PFUser.currentUser()!.username
         
         if let profileImage = PFUser.currentUser()?.valueForKey("profilePicture") as? PFFile {
