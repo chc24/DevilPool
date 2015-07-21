@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol DatePickerDelegate {
+    func didSelectDate(date: NSDate!)
+}
+
 class DatePickerViewController: UIViewController, RSDFDatePickerViewDelegate, RSDFDatePickerViewDataSource {
 
+    var delegate : DatePickerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +49,9 @@ class DatePickerViewController: UIViewController, RSDFDatePickerViewDelegate, RS
     func datePickerView(view: RSDFDatePickerView!, didSelectDate date: NSDate!) {
         println(date.description)
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            
+            if let delegate = self.delegate {
+                delegate.didSelectDate(date)
+            }
         })
     }
     

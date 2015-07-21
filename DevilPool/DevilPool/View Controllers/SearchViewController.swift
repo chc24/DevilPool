@@ -12,10 +12,11 @@ import FBSDKCoreKit
 import UIKit
 import QuartzCore
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, DatePickerDelegate {
 
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var displayPicture: UIImageView!
+    @IBOutlet weak var dateLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +26,13 @@ class SearchViewController: UIViewController {
         if let profileImage = PFUser.currentUser()?.valueForKey("profilePicture") as? PFFile {
             
             // TODO Add Local Storage for Profile Pictures.
+            
             profileImage.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
                 if let data = data {
                     let image = UIImage(data: data, scale:1.0)!
-                    self.displayPicture.layer.masksToBounds = true
+                    
                     self.displayPicture.image = image
+                    self.displayPicture.layer.masksToBounds = true
                     self.displayPicture.layer.cornerRadius = self.displayPicture.frame.width/2
                 }
             }
@@ -44,14 +47,28 @@ class SearchViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "showCalendar" {
+            if let vc = segue.destinationViewController as? DatePickerViewController {
+                vc.delegate = self
+            }
+        }
     }
-    */
-
+    
+    // MARK: - DatePickerDelegate
+    
+    func didSelectDate(date: NSDate!) {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd"
+        
+        dateLabel.text = dateFormatter.stringFromDate(date)
+        
+    }
 }
