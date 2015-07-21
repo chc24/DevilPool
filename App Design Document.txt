@@ -61,4 +61,9 @@ Weekend TODO:
 	-Finalize Calender use
 	-figure out how to message and open from fb messenger
 
-
+Week of july 20:
+	-Store Post in Parse
+	-Query parse for posts
+	-Search By destinations
+	-follow data model
+	
