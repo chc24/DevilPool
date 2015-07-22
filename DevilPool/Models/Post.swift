@@ -28,6 +28,10 @@ class Post: PFObject, PFSubclassing {
         if let toTime = toTime {
             post["toDate"] = toTime
         }
+        if let destination = destination {
+            post["Destination"] = destination
+        }
+        
         post["fromUser"] = PFUser.currentUser()
         post.saveInBackgroundWithBlock( {
             (success: Bool, error: NSError?) -> Void in

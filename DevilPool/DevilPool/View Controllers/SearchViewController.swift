@@ -20,6 +20,7 @@ class SearchViewController: UIViewController, DatePickerDelegate {
     
     @IBOutlet weak var fromTimeLabel: UITextField!
     @IBOutlet weak var toTimeLabel: UITextField!
+    @IBOutlet weak var destinationLabel: UITextField!
     
     @IBAction func uploadPost(sender: AnyObject) {
         
@@ -28,7 +29,7 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         time.dateFormat = "MM/dd/yyyy, hh:mm aa"
         post.fromTime = time.dateFromString(fromTimeLabel.text)
         post.toTime = time.dateFromString(toTimeLabel.text)
-        println(time.dateFromString(fromTimeLabel.text))
+        post.destination = destinationLabel.text
         post.uploadPost()
     }
     
@@ -60,6 +61,14 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         
     }
     
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        if tag == 1{
+            fromTimeLabel.resignFirstResponder()
+        }
+        else {
+            toTimeLabel.resignFirstResponder()
+        }
+    }
     
     
     @IBAction func fromTimeLabelClicked(sender: UITextField!) {
