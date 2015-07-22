@@ -12,7 +12,7 @@ import FBSDKCoreKit
 import UIKit
 import QuartzCore
 
-class SearchViewController: UIViewController, DatePickerDelegate {
+class SearchViewController: UIViewController, DatePickerDelegate{
 
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var displayPicture: UIImageView!
@@ -25,11 +25,20 @@ class SearchViewController: UIViewController, DatePickerDelegate {
     @IBAction func uploadPost(sender: AnyObject) {
         
         let post = Post()
+        
         var time = NSDateFormatter()
         time.dateFormat = "MM/dd/yyyy, hh:mm aa"
+        
+        //Create Post
         post.fromTime = time.dateFromString(fromTimeLabel.text)
         post.toTime = time.dateFromString(toTimeLabel.text)
         post.destination = destinationLabel.text
+        
+        //Set read access rights
+        let acl = PFACL()
+        acl.setPublicReadAccess(true)
+        PFACL.setDefaultACL(acl, withAccessForCurrentUser: true)
+        
         post.uploadPost()
     }
     
@@ -68,8 +77,13 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         else {
             toTimeLabel.resignFirstResponder()
         }
+        
+        self.view.endEditing(true)
     }
     
+    func doneButtonPressed(sender: UIButton) {
+        resignDatePicker()
+    }
     
     @IBAction func fromTimeLabelClicked(sender: UITextField!) {
         tag = 1
@@ -78,10 +92,6 @@ class SearchViewController: UIViewController, DatePickerDelegate {
     @IBAction func toTimeLabel(sender: UITextField!) {
         tag = 2
         makeDatePicker(sender)
-    }
-    
-    func doneButtonPressed(sender: UIButton) {
-        resignDatePicker()
     }
     
     func resignDatePicker() {
@@ -129,6 +139,7 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         
         // Do any additional setup after loading the view.
         
+        self.destinationLabel.delegate = self
         
         
     }
@@ -162,5 +173,13 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         
         dateLabel.text = dateFormatter.stringFromDate(date)
         
+    }
+}
+
+extension SearchViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.destinationLabel.resignFirstResponder()
+        return true
     }
 }
