@@ -21,8 +21,18 @@ class SearchViewController: UIViewController, DatePickerDelegate {
     @IBOutlet weak var fromTimeLabel: UITextField!
     @IBOutlet weak var toTimeLabel: UITextField!
     
+    @IBAction func uploadPost(sender: AnyObject) {
+        
+        let post = Post()
+        var time = NSDateFormatter()
+        time.dateFormat = "MM/dd/yyyy, hh:mm aa"
+        post.fromTime = time.dateFromString(fromTimeLabel.text)
+        post.toTime = time.dateFromString(toTimeLabel.text)
+        println(time.dateFromString(fromTimeLabel.text))
+        post.uploadPost()
+    }
     
-    // Handle Repeat Code
+    // Handles Date Picker
     
     var tag = 0
     
@@ -32,7 +42,7 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
         
         var datePickerView: UIDatePicker = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
-        datePickerView.datePickerMode = UIDatePickerMode.Time
+        datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
         inputView.addSubview(datePickerView)
         
         let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
@@ -62,6 +72,10 @@ class SearchViewController: UIViewController, DatePickerDelegate {
     }
     
     func doneButtonPressed(sender: UIButton) {
+        resignDatePicker()
+    }
+    
+    func resignDatePicker() {
         if tag == 1{
             fromTimeLabel.resignFirstResponder()
         }
@@ -70,10 +84,9 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         }
     }
     
-    
     func handleDatePicker(sender: UIDatePicker) {
         var timeFormatter = NSDateFormatter()
-        timeFormatter.dateStyle = .NoStyle
+        timeFormatter.dateStyle = .ShortStyle
         timeFormatter.timeStyle = .ShortStyle
         if tag == 1{
             fromTimeLabel.text = timeFormatter.stringFromDate(sender.date)

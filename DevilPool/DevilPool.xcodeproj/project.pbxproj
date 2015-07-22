@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		113DF17C840FA912E6EBE839 /* libPods-DevilPool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */; };
+		C342B5CA1B5F411D00A96BE7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B5C91B5F411D00A96BE7 /* Post.swift */; };
 		C357330F1B5828FC00193580 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357330E1B5828FC00193580 /* AppDelegate.swift */; };
 		C35733161B5828FC00193580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35733141B5828FC00193580 /* Main.storyboard */; };
 		C35733181B5828FC00193580 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35733171B5828FC00193580 /* Images.xcassets */; };
@@ -55,6 +56,7 @@
 		2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DevilPool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8171C1E53AD988E30CE9235E /* Pods-DevilPool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevilPool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool.debug.xcconfig"; sourceTree = "<group>"; };
 		849F98DACFE571832FC6571F /* Pods-DevilPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevilPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool.release.xcconfig"; sourceTree = "<group>"; };
+		C342B5C91B5F411D00A96BE7 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		C35733091B5828FC00193580 /* DevilPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevilPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C357330D1B5828FC00193580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C357330E1B5828FC00193580 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		C342B5C81B5F40FC00A96BE7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C342B5C91B5F411D00A96BE7 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = SOURCE_ROOT;
+		};
 		C35733001B5828FC00193580 = {
 			isa = PBXGroup;
 			children = (
@@ -166,6 +176,7 @@
 		C357330B1B5828FC00193580 /* DevilPool */ = {
 			isa = PBXGroup;
 			children = (
+				C342B5C81B5F40FC00A96BE7 /* Models */,
 				C357335C1B584EEF00193580 /* Helpers */,
 				C35733531B58459C00193580 /* View Controllers */,
 				C357330E1B5828FC00193580 /* AppDelegate.swift */,
@@ -393,6 +404,7 @@
 				C35733591B58463400193580 /* GearViewController.swift in Sources */,
 				C35736271B5D674F00193580 /* DatePickerViewController.swift in Sources */,
 				C35733571B58461F00193580 /* PoolViewController.swift in Sources */,
+				C342B5CA1B5F411D00A96BE7 /* Post.swift in Sources */,
 				C357330F1B5828FC00193580 /* AppDelegate.swift in Sources */,
 				C35736231B59CC2E00193580 /* VerifyViewController.swift in Sources */,
 			);

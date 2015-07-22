@@ -4,3 +4,5 @@
 
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <RSDFDatePickerView.h>
+#import <Parse/PFObject+Subclass.h>
+#import <Parse/Parse.h>
