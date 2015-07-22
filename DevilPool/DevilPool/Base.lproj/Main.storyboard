@@ -198,6 +198,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.96300244536201596" green="1" blue="0.98807375601088021" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="lEa-SW-YDY" firstAttribute="top" secondItem="ere-2E-Rao" secondAttribute="bottom" constant="25" id="0An-vG-1Ls"/>
                             <constraint firstItem="TN5-pA-aSW" firstAttribute="leading" secondItem="Hki-SF-Y8s" secondAttribute="leading" id="0PB-yD-Rhm"/>
@@ -376,6 +377,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="aek-Qu-2Ep">
+                    <connections>
+                        <action selector="leaveDatePickerView:" destination="9pv-A4-QxB" id="1Hc-3k-42O"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-352" y="648"/>
         </scene>
@@ -473,7 +479,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="169" id="qLJ-kk-Fd8"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Placeholder Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

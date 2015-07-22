@@ -26,13 +26,31 @@ class SearchViewController: UIViewController, DatePickerDelegate {
     
     var tag = 0
     
+    
     func makeDatePicker(sender: UITextField!) {
         
-        var datePicker: UIDatePicker = UIDatePicker()
-        datePicker.datePickerMode = UIDatePickerMode.Time
-        sender.inputView = datePicker
-        datePicker.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+        let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
+        
+        var datePickerView: UIDatePicker = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
+        datePickerView.datePickerMode = UIDatePickerMode.Time
+        inputView.addSubview(datePickerView)
+        
+        let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
+        doneButton.setTitle("Done", forState: UIControlState.Normal)
+        doneButton.setTitle("Done", forState: UIControlState.Highlighted)
+        doneButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        doneButton.setTitleColor(UIColor.grayColor(), forState: UIControlState.Highlighted)
+        
+        inputView.addSubview(doneButton) // add Button to UIView
+        
+        doneButton.addTarget(self, action: "doneButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside) // set button click event
+
+        sender.inputView = inputView
+        datePickerView.addTarget(self, action: Selector("handleDatePicker:"), forControlEvents: UIControlEvents.ValueChanged)
+        
     }
+    
+    
     
     @IBAction func fromTimeLabelClicked(sender: UITextField!) {
         tag = 1
@@ -42,6 +60,16 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         tag = 2
         makeDatePicker(sender)
     }
+    
+    func doneButtonPressed(sender: UIButton) {
+        if tag == 1{
+            fromTimeLabel.resignFirstResponder()
+        }
+        else {
+            toTimeLabel.resignFirstResponder()
+        }
+    }
+    
     
     func handleDatePicker(sender: UIDatePicker) {
         var timeFormatter = NSDateFormatter()
@@ -53,6 +81,7 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         else {
             toTimeLabel.text = timeFormatter.stringFromDate(sender.date)
         }
+        
     }
 
     override func viewDidLoad() {
@@ -77,6 +106,9 @@ class SearchViewController: UIViewController, DatePickerDelegate {
         }
         
         // Do any additional setup after loading the view.
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
