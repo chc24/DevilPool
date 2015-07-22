@@ -27,8 +27,10 @@ Facebook User Object
 	-authData (FB ID)
 
 Post Object
-	-Time Range Parse Date
+	-Time Range Parse Date (Not required)
 	-Pointer fromUser
+	-Destination (required)
+	-
 
 Carpool/Match Object
 	-Pointer FromUser
@@ -36,13 +38,11 @@ Carpool/Match Object
 
 MVP Milestones:
 Tasks: 
-Come up with a name
 Design Screens, Views, Controllers
 "select your school" - Duke (VERSION 1)
 Enable Push or Email notifications in the event of a match
-Integrate Facebook login, verify email .edu
+verify email .edu
 Method to store email verified for accounts (Parse_User?) 
-<integrate maps API>
 #integrate calender API
 integrate search function
 <integrate database Parse to store "Share" objects>
@@ -62,8 +62,12 @@ Weekend TODO:
 	-figure out how to message and open from fb messenger
 
 Week of july 20:
-	-Store Post in Parse
+	-Store Post in Parse as Parse Post Class
 	-Query parse for posts
 	-Search By destinations
 	-follow data model
-	
+
+Questions
+	-email verification
+	-storing data in parse
+
