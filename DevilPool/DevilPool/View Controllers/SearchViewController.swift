@@ -13,11 +13,6 @@ import UIKit
 import QuartzCore
 
 class SearchViewController: UIViewController, DatePickerDelegate{
-
-    @IBOutlet weak var displayName: UILabel!
-    @IBOutlet weak var displayPicture: UIImageView!
-    @IBOutlet weak var dateLabel: UILabel!
-    
     
     @IBOutlet weak var onDateLabel: UITextField!
     @IBOutlet weak var fromTimeLabel: UITextField!
@@ -159,24 +154,6 @@ class SearchViewController: UIViewController, DatePickerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Display Facebook Name / Profile Picture
-        displayName.text = PFUser.currentUser()!.username
-        
-        if let profileImage = PFUser.currentUser()?.valueForKey("profilePicture") as? PFFile {
-            
-            // TODO Add Local Storage for Profile Pictures.
-            
-            profileImage.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
-                if let data = data {
-                    let image = UIImage(data: data, scale:1.0)!
-                    
-                    self.displayPicture.image = image
-                    self.displayPicture.layer.masksToBounds = true
-                    self.displayPicture.layer.cornerRadius = self.displayPicture.frame.width/2
-                }
-            }
-        }
-        
         // Do any additional setup after loading the view.
         
         self.destinationLabel.delegate = self
@@ -194,24 +171,13 @@ class SearchViewController: UIViewController, DatePickerDelegate{
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "showCalendar" {
-            if let vc = segue.destinationViewController as? DatePickerViewController {
-                vc.delegate = self
-            }
-        }
-    }
+    
     
     // MARK: - DatePickerDelegate
     
     func didSelectDate(date: NSDate!) {
+        //TODO
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM-dd"
-        
-        dateLabel.text = dateFormatter.stringFromDate(date)
         
     }
 }
