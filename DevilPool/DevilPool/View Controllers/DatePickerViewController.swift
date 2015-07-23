@@ -24,19 +24,18 @@ class DatePickerViewController: UIViewController, RSDFDatePickerViewDelegate, RS
         
         var query = PFQuery(className: "Post")
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "MM/dd/yyyy"
         query.findObjectsInBackgroundWithBlock { (dates: [AnyObject]?, error: NSError?) -> Void in
             
             if let dates = dates as? [PFObject] {
                 for item in dates {
-                    if let date = item["fromDate"] as? NSDate {
-                        println(date)
+                    if let date = item["onDate"] as? NSDate {
                         self.datePosts.addObject(dateFormatter.stringFromDate(date))
                     }
                 }
             }
             
-            println("khkhkhkh")
+            println(self.datePosts)
             
         var datePickerView: RSDFDatePickerView = RSDFDatePickerView(frame: self.view.bounds)
         datePickerView.delegate = self
@@ -73,8 +72,8 @@ class DatePickerViewController: UIViewController, RSDFDatePickerViewDelegate, RS
     
     func datePickerView(view: RSDFDatePickerView!, shouldMarkDate date: NSDate!) -> Bool {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
         return datePosts.containsObject(dateFormatter.stringFromDate(date))
     }
     

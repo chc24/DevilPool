@@ -11,7 +11,7 @@ import Parse
 
 class Post: PFObject, PFSubclassing {
    
-    var date: NSDate?
+    var onDate: NSDate?
     var fromTime: NSDate?
     var toTime: NSDate?
     var destination: String?
@@ -22,11 +22,14 @@ class Post: PFObject, PFSubclassing {
         println("uploading")
         
         let post = PFObject(className: "Post")
+        if let onDate = onDate {
+            post["onDate"] = onDate
+        }
         if let fromTime = fromTime {
-            post["fromDate"] = fromTime
+            post["fromTime"] = fromTime
         }
         if let toTime = toTime {
-            post["toDate"] = toTime
+            post["toTime"] = toTime
         }
         if let destination = destination {
             post["Destination"] = destination

@@ -18,6 +18,8 @@ class SearchViewController: UIViewController, DatePickerDelegate{
     @IBOutlet weak var displayPicture: UIImageView!
     @IBOutlet weak var dateLabel: UILabel!
     
+    
+    @IBOutlet weak var onDateLabel: UITextField!
     @IBOutlet weak var fromTimeLabel: UITextField!
     @IBOutlet weak var toTimeLabel: UITextField!
     @IBOutlet weak var destinationLabel: UITextField!
@@ -26,12 +28,22 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         
         let post = Post()
         
-        var time = NSDateFormatter()
-        time.dateFormat = "MM/dd/yyyy, hh:mm aa"
+        var timetoString = NSDateFormatter()
+        
+        timetoString.dateFormat = "MM/dd/yyyy, hh:mm aa"
+        let fT = timetoString.dateFromString(onDateLabel.text + ", " + fromTimeLabel.text)
+        let tT = timetoString.dateFromString(onDateLabel.text + ", " + toTimeLabel.text)
+        
+        timetoString.dateFormat = "MM/dd/yyyy"
+        let onD = timetoString.dateFromString(onDateLabel.text)
         
         //Create Post
-        post.fromTime = time.dateFromString(fromTimeLabel.text)
-        post.toTime = time.dateFromString(toTimeLabel.text)
+        
+        //TODO
+        
+        post.onDate = onD
+        post.fromTime = fT
+        post.toTime = tT
         post.destination = destinationLabel.text
         
         //Set read access rights
@@ -39,20 +51,34 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         acl.setPublicReadAccess(true)
         PFACL.setDefaultACL(acl, withAccessForCurrentUser: true)
         
-        post.uploadPost()
+        if fromTimeLabel.text != "" && toTimeLabel.text != "" && destinationLabel.text != "" && onDateLabel.text  != ""{
+            post.uploadPost()
+            onDateLabel.text = ""
+            fromTimeLabel.text = ""
+            toTimeLabel.text = ""
+            destinationLabel.text = ""
+        }
+        else {
+            println("Fill in fields")
+        }
     }
     
     // Handles Date Picker
     
     var tag = 0
-    
+
     
     func makeDatePicker(sender: UITextField!) {
         
         let inputView = UIView(frame: CGRectMake(0, 0, self.view.frame.width, 240))
         
         var datePickerView: UIDatePicker = UIDatePicker(frame: CGRectMake(0, 40, 0, 0))
-        datePickerView.datePickerMode = UIDatePickerMode.DateAndTime
+        if tag == 3{
+            datePickerView.datePickerMode = UIDatePickerMode.Date
+        }
+        else{
+            datePickerView.datePickerMode = UIDatePickerMode.Time
+        }
         inputView.addSubview(datePickerView)
         
         let doneButton = UIButton(frame: CGRectMake((self.view.frame.size.width/2) - (100/2), 0, 100, 50))
@@ -74,8 +100,11 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         if tag == 1{
             fromTimeLabel.resignFirstResponder()
         }
-        else {
+        else if tag == 2{
             toTimeLabel.resignFirstResponder()
+        }
+        else {
+            onDateLabel.resignFirstResponder()
         }
         
         self.view.endEditing(true)
@@ -85,6 +114,10 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         resignDatePicker()
     }
     
+    @IBAction func onDateLabelClicked(sender: UITextField!) {
+        tag = 3
+        makeDatePicker(sender)
+    }
     @IBAction func fromTimeLabelClicked(sender: UITextField!) {
         tag = 1
         makeDatePicker(sender)
@@ -98,22 +131,29 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         if tag == 1{
             fromTimeLabel.resignFirstResponder()
         }
-        else {
+        else if tag == 2{
             toTimeLabel.resignFirstResponder()
+        }
+        else {
+            onDateLabel.resignFirstResponder()
         }
     }
     
     func handleDatePicker(sender: UIDatePicker) {
         var timeFormatter = NSDateFormatter()
-        timeFormatter.dateStyle = .ShortStyle
-        timeFormatter.timeStyle = .ShortStyle
-        if tag == 1{
-            fromTimeLabel.text = timeFormatter.stringFromDate(sender.date)
+        if tag == 3{
+            timeFormatter.dateFormat = "MMM dd, yyyy"
+            onDateLabel.text = timeFormatter.stringFromDate(sender.date)
         }
         else {
-            toTimeLabel.text = timeFormatter.stringFromDate(sender.date)
+            timeFormatter.dateFormat = "hh:mm aa"
+            if tag == 1{
+                fromTimeLabel.text = timeFormatter.stringFromDate(sender.date)
+            }
+            else {
+                toTimeLabel.text = timeFormatter.stringFromDate(sender.date)
+            }
         }
-        
     }
 
     override func viewDidLoad() {
