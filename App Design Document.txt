@@ -38,14 +38,12 @@ Carpool/Match Object
 
 MVP Milestones:
 Tasks: 
-Design Screens, Views, Controllers
 "select your school" - Duke (VERSION 1)
 Enable Push or Email notifications in the event of a match
 verify email .edu
 Method to store email verified for accounts (Parse_User?) 
-#integrate calender API
 integrate search function
-<integrate database Parse to store "Share" objects>
+<integrate database Parse to store "Post" objects>
 Integrate chat/connect feature (Connect room for up to x people)
 
 Week of July 15
@@ -61,9 +59,7 @@ Weekend TODO:
 	-Finalize Calender use
 	-figure out how to message and open from fb messenger
 
-Week of july 20:
-	-Store Post in Parse as Parse Post Class
-	-Query parse for posts
+Week of july 20
 	-Search By destinations
 	-follow data model
 
