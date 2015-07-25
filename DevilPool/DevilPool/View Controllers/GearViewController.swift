@@ -12,8 +12,12 @@ class GearViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        //Disable and notify if no posts/carpools
     }
 
     override func didReceiveMemoryWarning() {

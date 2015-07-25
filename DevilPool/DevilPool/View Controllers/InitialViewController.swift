@@ -9,7 +9,7 @@
 import Parse
 import UIKit
 
-class InitialViewController: UIViewController {
+class InitialViewController: UIViewController, DatePickerDelegate{
     
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var displayPicture: UIImageView!
@@ -39,15 +39,15 @@ class InitialViewController: UIViewController {
         
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        // Get the new view controller using segue.destinationViewController.
-//        // Pass the selected object to the new view controller.
-//        if segue.identifier == "showCalendar" {
-//            if let vc = segue.destinationViewController as? DatePickerViewController {
-//                vc.delegate = self
-//            }
-//        }
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if segue.identifier == "showCalendar" {
+            if let vc = segue.destinationViewController as? DatePickerViewController {
+                vc.delegate = self
+            }
+        }
+    }
     
     func didSelectDate(date: NSDate!) {
         //TODO
@@ -62,3 +62,5 @@ class InitialViewController: UIViewController {
     
 
 }
+
+

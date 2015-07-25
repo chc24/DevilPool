@@ -10,6 +10,9 @@
 		113DF17C840FA912E6EBE839 /* libPods-DevilPool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */; };
 		C342B5CA1B5F411D00A96BE7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B5C91B5F411D00A96BE7 /* Post.swift */; };
 		C34B04511B61866200B0EC8B /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04501B61866200B0EC8B /* InitialViewController.swift */; };
+		C34B04531B6193BE00B0EC8B /* SearchDestinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */; };
+		C34B04561B61B64B00B0EC8B /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04551B61B64B00B0EC8B /* SearchResultTableViewCell.swift */; };
+		C34B04581B62F43200B0EC8B /* ParseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04571B62F43200B0EC8B /* ParseHelper.swift */; };
 		C357330F1B5828FC00193580 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C357330E1B5828FC00193580 /* AppDelegate.swift */; };
 		C35733161B5828FC00193580 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C35733141B5828FC00193580 /* Main.storyboard */; };
 		C35733181B5828FC00193580 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C35733171B5828FC00193580 /* Images.xcassets */; };
@@ -59,6 +62,9 @@
 		849F98DACFE571832FC6571F /* Pods-DevilPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevilPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool.release.xcconfig"; sourceTree = "<group>"; };
 		C342B5C91B5F411D00A96BE7 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		C34B04501B61866200B0EC8B /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDestinationViewController.swift; sourceTree = "<group>"; };
+		C34B04551B61B64B00B0EC8B /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultTableViewCell.swift; path = Views/SearchResultTableViewCell.swift; sourceTree = "<group>"; };
+		C34B04571B62F43200B0EC8B /* ParseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseHelper.swift; sourceTree = "<group>"; };
 		C35733091B5828FC00193580 /* DevilPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevilPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C357330D1B5828FC00193580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C357330E1B5828FC00193580 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +160,14 @@
 			path = Models;
 			sourceTree = SOURCE_ROOT;
 		};
+		C34B04541B61B62200B0EC8B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C34B04551B61B64B00B0EC8B /* SearchResultTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		C35733001B5828FC00193580 = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +192,7 @@
 		C357330B1B5828FC00193580 /* DevilPool */ = {
 			isa = PBXGroup;
 			children = (
+				C34B04541B61B62200B0EC8B /* Views */,
 				C342B5C81B5F40FC00A96BE7 /* Models */,
 				C357335C1B584EEF00193580 /* Helpers */,
 				C35733531B58459C00193580 /* View Controllers */,
@@ -254,6 +269,7 @@
 				C35736221B59CC2E00193580 /* VerifyViewController.swift */,
 				C35736261B5D674F00193580 /* DatePickerViewController.swift */,
 				C34B04501B61866200B0EC8B /* InitialViewController.swift */,
+				C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -262,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				C357335D1B584F1E00193580 /* ParseLoginHelper.swift */,
+				C34B04571B62F43200B0EC8B /* ParseHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -403,13 +420,16 @@
 			files = (
 				C35733551B58460400193580 /* SearchViewController.swift in Sources */,
 				C357335E1B584F1E00193580 /* ParseLoginHelper.swift in Sources */,
+				C34B04561B61B64B00B0EC8B /* SearchResultTableViewCell.swift in Sources */,
 				C35733621B58650100193580 /* FacebookLoginViewController.swift in Sources */,
+				C34B04531B6193BE00B0EC8B /* SearchDestinationViewController.swift in Sources */,
 				C35733591B58463400193580 /* GearViewController.swift in Sources */,
 				C35736271B5D674F00193580 /* DatePickerViewController.swift in Sources */,
 				C34B04511B61866200B0EC8B /* InitialViewController.swift in Sources */,
 				C35733571B58461F00193580 /* PoolViewController.swift in Sources */,
 				C342B5CA1B5F411D00A96BE7 /* Post.swift in Sources */,
 				C357330F1B5828FC00193580 /* AppDelegate.swift in Sources */,
+				C34B04581B62F43200B0EC8B /* ParseHelper.swift in Sources */,
 				C35736231B59CC2E00193580 /* VerifyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

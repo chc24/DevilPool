@@ -6,3 +6,4 @@
 #import <RSDFDatePickerView.h>
 #import <Parse/PFObject+Subclass.h>
 #import <Parse/Parse.h>
+#import <FBSDKMessengerShareKit/FBSDKMessengerShareKit.h>

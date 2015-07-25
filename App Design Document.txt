@@ -62,8 +62,13 @@ Weekend TODO:
 Week of july 20
 	-Search By destinations
 	-follow data model
+	-change ability to select date range
+	-finish all functionality.
 
-Questions
-	-email verification
-	-storing data in parse
+Color Code Destinations
+
+Next Week: 
+	-refining code
+	-animations, UI Designs
+
 
