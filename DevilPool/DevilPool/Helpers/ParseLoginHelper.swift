@@ -63,7 +63,7 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                         if error == nil {
                             var picture = PFFile(data: data)
                             user.setObject(picture, forKey: "profilePicture")
-                            user.setObject(facebookID, forKey: facebookID)
+                            user.setObject(facebookID, forKey: "FacebookID")
                             user.saveInBackground()
                         }
                         else {

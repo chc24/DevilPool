@@ -34,7 +34,6 @@ class SearchDestinationViewController: UIViewController {
             
             
         }
-        println(self.queryResults)
         
     }
     
@@ -120,13 +119,14 @@ extension SearchDestinationViewController: UITableViewDataSource {
         
         refreshAlert.addAction(UIAlertAction(title: "Message through Facebook", style: .Default, handler: { (action: UIAlertAction!) in
             
-            let fbID = (current["fromUser"] as! PFUser)["FacebookID"] as! String
-            var url = NSURL(string:"fb://profile/\(fbID)")
+            let fbID = current["fromUser"] as! PFUser
+            let fburl = fbID["FacebookID"] as! String
+            var url = NSURL(string:"fb://profile/\(fburl)")
             
             if UIApplication.sharedApplication().canOpenURL(url!) {
                 UIApplication.sharedApplication().openURL(url!)
             } else {
-                UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/\(fbID)")!)
+                UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/\(fburl)")!)
             }
             
             
