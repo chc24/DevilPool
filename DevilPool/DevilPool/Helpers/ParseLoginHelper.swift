@@ -51,7 +51,7 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                 
                 if let fbUsername = result?["name"] as? String {
                     // assign Facebook name to PFUser
-                    println("Hello " + fbUsername)
+                    println(result)
                     
                     let facebookID: String = result?["id"] as! String
                     let pictureURL = "https://graph.facebook.com/\(facebookID)/picture?type=large&return_ssl_resources=1"
@@ -63,6 +63,7 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                         if error == nil {
                             var picture = PFFile(data: data)
                             user.setObject(picture, forKey: "profilePicture")
+                            user.setObject(facebookID, forKey: facebookID)
                             user.saveInBackground()
                         }
                         else {

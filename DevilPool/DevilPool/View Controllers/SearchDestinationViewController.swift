@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import FBSDKMessengerShareKit
 
 class SearchDestinationViewController: UIViewController {
     
@@ -20,11 +21,11 @@ class SearchDestinationViewController: UIViewController {
         var query = PFQuery(className: "Post")
         query.whereKey("Destination", containsString: destLabel.text)
         query.includeKey("fromUser")
+        
         query.findObjectsInBackgroundWithBlock { (dates: [AnyObject]?, error: NSError?) -> Void in
             
             if let dates = dates as? [PFObject] {
-                println("lalala")
-                println(dates)
+               
                 self.queryResults = dates
                 
             }
@@ -99,6 +100,44 @@ extension SearchDestinationViewController: UITableViewDataSource {
         cell.searchToDate.text = dateFormatter.stringFromDate(onDate)
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        var current = queryResults[indexPath.row] as PFObject
+        var username = (current["fromUser"] as! PFUser).username
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "hh:mm aa"
+        
+        let fromDate = dateFormatter.stringFromDate(current["fromTime"] as! NSDate)
+        let toDate = dateFormatter.stringFromDate(current["toTime"] as! NSDate)
+    
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        let onDate = dateFormatter.stringFromDate(current["onDate"] as! NSDate)
+        
+        let message = "Ask " + username! + " if he wants to carpool!"
+        var refreshAlert = UIAlertController(title: "Confirmation", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Message through Facebook", style: .Default, handler: { (action: UIAlertAction!) in
+            
+            let fbID = (current["fromUser"] as! PFUser)["FacebookID"] as! String
+            var url = NSURL(string:"fb://profile/\(fbID)")
+            
+            if UIApplication.sharedApplication().canOpenURL(url!) {
+                UIApplication.sharedApplication().openURL(url!)
+            } else {
+                UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/\(fbID)")!)
+            }
+            
+            
+        }))
+        
+        refreshAlert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+            println("Handle Cancel Logic here")
+        }))
+        
+        presentViewController(refreshAlert, animated: true, completion: nil)
+        
     }
 }
 

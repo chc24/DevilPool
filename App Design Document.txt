@@ -67,7 +67,9 @@ Week of july 20
 
 Color Code Destinations
 
-Next Week: 
+Week of 27
+	-Push Notifications - Initial send , and receiving confirmation https://parse.com/questions/how-to-send-push-notification-to-a-specific-device-without-creating-channels
+	-
 	-refining code
 	-animations, UI Designs
 

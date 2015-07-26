@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		113DF17C840FA912E6EBE839 /* libPods-DevilPool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */; };
+		C320881B1B644DB800846F99 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C320881A1B644DB800846F99 /* FBSDKMessengerShareKit.framework */; };
 		C342B5CA1B5F411D00A96BE7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B5C91B5F411D00A96BE7 /* Post.swift */; };
 		C34B04511B61866200B0EC8B /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04501B61866200B0EC8B /* InitialViewController.swift */; };
 		C34B04531B6193BE00B0EC8B /* SearchDestinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */; };
@@ -60,6 +61,7 @@
 		2FA1A482D5D4B7F6D97D3CA2 /* libPods-DevilPool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DevilPool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8171C1E53AD988E30CE9235E /* Pods-DevilPool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevilPool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool.debug.xcconfig"; sourceTree = "<group>"; };
 		849F98DACFE571832FC6571F /* Pods-DevilPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevilPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-DevilPool/Pods-DevilPool.release.xcconfig"; sourceTree = "<group>"; };
+		C320881A1B644DB800846F99 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../../../../Documents/FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		C342B5C91B5F411D00A96BE7 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		C34B04501B61866200B0EC8B /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDestinationViewController.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C320881B1B644DB800846F99 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				C35734FC1B58D37800193580 /* libz.dylib in Frameworks */,
 				C35734FA1B58D36B00193580 /* Security.framework in Frameworks */,
 				C35734F81B58D35900193580 /* QuartzCore.framework in Frameworks */,
@@ -233,6 +236,7 @@
 		C35733301B58361200193580 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C320881A1B644DB800846F99 /* FBSDKMessengerShareKit.framework */,
 				C35734FB1B58D37800193580 /* libz.dylib */,
 				C35734F91B58D36B00193580 /* Security.framework */,
 				C35734F71B58D35900193580 /* QuartzCore.framework */,
@@ -565,6 +569,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					/Users/Administrator/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = DevilPool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -584,6 +589,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					/Users/Administrator/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = DevilPool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
