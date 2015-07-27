@@ -17,12 +17,23 @@ class VerifyViewController: UIViewController {
         if let email = emailField.text {
             PFUser.currentUser()?.setObject(email, forKey: "email")
             PFUser.currentUser()?.saveInBackground()
+            
             var alert = UIAlertController(title: "Email Sent", message: "Please click the confirmation in your email", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else {
                     }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        var user = PFUser.currentUser()
+        if let verified = user!.objectForKey("emailVerified") as? Bool {
+            if verified == true {
+                self.performSegueWithIdentifier("verifyToHomeView", sender: self)
+            }
+        }
+
     }
     
     override func viewDidLoad() {
