@@ -843,14 +843,47 @@
                                     <segue destination="49e-Tb-3d3" kind="show" identifier="VerifyToHomeView" id="vnI-ah-apx"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter netID@duke.edu" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vS0-Ew-olm">
+                                <rect key="frame" x="47" y="196" width="256" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlS-6E-dff">
+                                <rect key="frame" x="370" y="195" width="49" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="REB-dh-jP4"/>
+                                </constraints>
+                                <state key="normal" title="Verify">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="verifyEmailPressed:" destination="2DI-bG-2ly" eventType="touchUpInside" id="s5U-ca-xDn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oUw-Ao-aSb" firstAttribute="centerX" secondItem="m5C-af-bRu" secondAttribute="centerX" id="06x-Rr-fan"/>
+                            <constraint firstItem="vS0-Ew-olm" firstAttribute="leading" secondItem="m5C-af-bRu" secondAttribute="leadingMargin" constant="31" id="5yx-9f-nvI"/>
+                            <constraint firstAttribute="trailing" secondItem="WlS-6E-dff" secondAttribute="trailing" constant="181" id="Cd3-3b-8XC"/>
+                            <constraint firstItem="vS0-Ew-olm" firstAttribute="baseline" secondItem="WlS-6E-dff" secondAttribute="baseline" id="N0u-8m-mA8"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="leading" relation="lessThanOrEqual" secondItem="vS0-Ew-olm" secondAttribute="trailing" constant="23" id="TRE-zU-Caw"/>
+                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="vS0-Ew-olm" secondAttribute="bottom" constant="17" id="jAu-T7-6Tg"/>
                             <constraint firstItem="t39-LX-qig" firstAttribute="top" secondItem="oUw-Ao-aSb" secondAttribute="bottom" constant="234" id="k2m-b5-Izf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WlS-6E-dff" secondAttribute="trailing" constant="157" id="mzY-T1-YPL"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="leading" secondItem="vS0-Ew-olm" secondAttribute="trailing" constant="67" id="r18-kd-NUD"/>
                             <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="dbL-gN-8y8" secondAttribute="bottom" constant="223" id="yi5-ca-mJK"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="TRE-zU-Caw"/>
+                                <exclude reference="mzY-T1-YPL"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="emailField" destination="vS0-Ew-olm" id="KtK-n1-NIx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGH-yF-11v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

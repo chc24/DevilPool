@@ -7,9 +7,24 @@
 //
 
 import UIKit
+import Parse
 
 class VerifyViewController: UIViewController {
 
+    @IBOutlet weak var emailField: UITextField!
+    
+    @IBAction func verifyEmailPressed(sender: AnyObject) {
+        if let email = emailField.text {
+            PFUser.currentUser()?.setObject(email, forKey: "email")
+            PFUser.currentUser()?.saveInBackground()
+            var alert = UIAlertController(title: "Email Sent", message: "Please click the confirmation in your email", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else {
+                    }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

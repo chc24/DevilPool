@@ -18,13 +18,14 @@ class SearchDestinationViewController: UIViewController {
     var queryResults : [PFObject] = []
     
     @IBAction func searchDestinations(sender: AnyObject) {
+        destLabel.resignFirstResponder()
         var query = PFQuery(className: "Post")
         query.whereKey("Destination", containsString: destLabel.text)
         query.includeKey("fromUser")
         
         query.findObjectsInBackgroundWithBlock { (dates: [AnyObject]?, error: NSError?) -> Void in
             
-            if let dates = dates as? [PFObject] {
+            if let dates = dates as? [PFObject]     {
                
                 self.queryResults = dates
                 

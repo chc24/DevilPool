@@ -105,6 +105,7 @@
 		C357350B1B596DBD00193580 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		C35736221B59CC2E00193580 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		C35736261B5D674F00193580 /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		C381B8C91B66CD16000BF465 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +175,7 @@
 		C35733001B5828FC00193580 = {
 			isa = PBXGroup;
 			children = (
+				C381B8C91B66CD16000BF465 /* MyPlayground.playground */,
 				C35733301B58361200193580 /* Frameworks */,
 				C357330B1B5828FC00193580 /* DevilPool */,
 				C35733231B5828FC00193580 /* DevilPoolTests */,
