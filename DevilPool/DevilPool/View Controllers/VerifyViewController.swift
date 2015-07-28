@@ -21,18 +21,28 @@ class VerifyViewController: UIViewController {
         checkVerifiedButton.hidden = false
         emailField.resignFirstResponder()
         if let email = emailField.text {
-            PFUser.currentUser()?.setObject(email, forKey: "email")
-            PFUser.currentUser()?.saveInBackground()
-            
-            var alert = UIAlertController(title: "Email Sent", message: "Please click the confirmation in your email", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            if checkEmail(email) {
+                PFUser.currentUser()?.setObject(email, forKey: "email")
+                PFUser.currentUser()?.saveInBackground()
+                
+                var alert = UIAlertController(title: "Email Sent", message: "Please click the confirmation in your email", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
         else {
             //empty field
             println("empty field")
         }
     }
+    
+    func checkEmail(email: String) -> Bool {
+        if email.rangeOfString("@duke.edu") != nil {
+            return true
+        }
+        return false
+    }
+    
     @IBAction func checkVerified(sender: AnyObject) {
         
         //TODO Move to ParseHelper

@@ -14,9 +14,32 @@ class PoolViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
+        //TODO : move to ParseHelper
+        
+        var query = PFQuery(className: "Post")
+        query.whereKey("fromUser", equalTo: PFUser.currentUser()!)
+        query.findObjectsInBackgroundWithBlock { (posts, error: NSError?) -> Void in
+            
+            //display posts
+            
+            
+            
+            //display no current posts
+            
+        }
+        
+        //Check if Current user has any posts or groups committed == query for posts
+        
+        
+        
+        //Display Posts
+        
+        //Display Groups
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

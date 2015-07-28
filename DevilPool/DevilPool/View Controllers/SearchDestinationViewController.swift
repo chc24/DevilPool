@@ -104,6 +104,7 @@ extension SearchDestinationViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        
         var current = queryResults[indexPath.row] as PFObject
         var username = (current["fromUser"] as! PFUser).username
         var dateFormatter = NSDateFormatter()
@@ -120,15 +121,20 @@ extension SearchDestinationViewController: UITableViewDataSource {
         
         refreshAlert.addAction(UIAlertAction(title: "Message through Facebook", style: .Default, handler: { (action: UIAlertAction!) in
             
+            let user = PFUser.currentUser()
+            let relation = current.relationForKey("userPool")
+            relation.addObject(user!)
+            current.saveInBackground()
+            
             let fbID = current["fromUser"] as! PFUser
             let fburl = fbID["FacebookID"] as! String
             var url = NSURL(string:"fb://profile/\(fburl)")
             
-            if UIApplication.sharedApplication().canOpenURL(url!) {
-                UIApplication.sharedApplication().openURL(url!)
-            } else {
-                UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/\(fburl)")!)
-            }
+//            if UIApplication.sharedApplication().canOpenURL(url!) {
+//                UIApplication.sharedApplication().openURL(url!)
+//            } else {
+//                UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/\(fburl)")!)
+//            }
             
             
         }))

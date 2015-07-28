@@ -36,6 +36,15 @@ class Post: PFObject, PFSubclassing {
         }
         
         post["fromUser"] = PFUser.currentUser()
+        
+        
+        var relation = post.relationForKey("userPool")
+        relation.addObject(PFUser.currentUser()!)
+        
+//        var userPosts = PFUser.currentUser()?.relationForKey("userPosts")
+//        userPosts?.addObject(post)
+//        PFUser.currentUser()?.saveInBackground()
+//        
         post.saveInBackgroundWithBlock( {
             (success: Bool, error: NSError?) -> Void in
             
@@ -45,6 +54,7 @@ class Post: PFObject, PFSubclassing {
                 println(error)
             }
         })
+        
         
         
     }
