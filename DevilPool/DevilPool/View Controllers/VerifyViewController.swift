@@ -15,6 +15,9 @@ class VerifyViewController: UIViewController {
     @IBOutlet weak var checkVerifiedButton: UIButton!
     
     @IBAction func verifyEmailPressed(sender: AnyObject) {
+        
+        //TODO move to ParseHelper
+        
         checkVerifiedButton.hidden = false
         emailField.resignFirstResponder()
         if let email = emailField.text {
@@ -32,30 +35,32 @@ class VerifyViewController: UIViewController {
     }
     @IBAction func checkVerified(sender: AnyObject) {
         
+        //TODO Move to ParseHelper
         println("appeared")
         var user = PFUser.currentUser()
-        user?.fetch()
-        if user!.objectForKey("emailVerified") as! Bool == true {
-           
-            self.performSegueWithIdentifier("VerifyToHomeView", sender: self)
+        user?.fetchInBackgroundWithBlock({ (user, NSError) -> Void in
             
-        }
-        else {
-            var alert = UIAlertController(title: "Sorry, please try again", message: "Please click the confirmation link in your email", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-        
+            if user!.objectForKey("emailVerified") as! Bool == true {
+                
+                self.performSegueWithIdentifier("VerifyToHomeView", sender: self)
+                
+            }
+            else {
+                var alert = UIAlertController(title: "Sorry, please try again", message: "Please click the confirmation link in your email", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            
+        })
     }
     
     override func viewDidAppear(animated: Bool) {
-        
-
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         checkVerifiedButton.hidden = true
-                // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
