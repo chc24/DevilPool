@@ -7,3 +7,8 @@ var str = "Hello, playground"
 if str.rangeOfString("playground") != nil{
     println("exists")
 }
+
+var a = true
+var b = false
+
+println(a && b)

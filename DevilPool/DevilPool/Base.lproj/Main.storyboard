@@ -832,9 +832,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUw-Ao-aSb">
-                                <rect key="frame" x="216" y="243" width="169" height="123"/>
+                                <rect key="frame" x="211" y="354" width="174" height="12"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="169" id="qLJ-kk-Fd8"/>
+                                    <constraint firstAttribute="width" constant="174" id="qLJ-kk-Fd8"/>
                                 </constraints>
                                 <state key="normal" title="Placeholder Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -843,45 +843,95 @@
                                     <segue destination="49e-Tb-3d3" kind="show" identifier="VerifyToHomeView" id="vnI-ah-apx"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter netID@duke.edu" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vS0-Ew-olm">
-                                <rect key="frame" x="47" y="196" width="256" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WlS-6E-dff">
-                                <rect key="frame" x="370" y="195" width="49" height="30"/>
+                                <rect key="frame" x="239" y="195" width="76" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="49" id="REB-dh-jP4"/>
+                                    <constraint firstAttribute="width" constant="345" id="6k3-8c-PYO"/>
+                                    <constraint firstAttribute="width" constant="76" id="soU-Pt-n9I"/>
                                 </constraints>
                                 <state key="normal" title="Verify">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="6k3-8c-PYO"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="verifyEmailPressed:" destination="2DI-bG-2ly" eventType="touchUpInside" id="s5U-ca-xDn"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pN8-ja-U0c">
+                                <rect key="frame" x="47" y="272" width="167" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="167" id="wl6-gt-TA6"/>
+                                </constraints>
+                                <state key="normal" title="Click if you have verified">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="checkVerified:" destination="2DI-bG-2ly" eventType="touchUpInside" id="OdP-S2-QAo"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter netID@duke.edu" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vS0-Ew-olm">
+                                <rect key="frame" x="47" y="196" width="179" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="179" id="3tS-Q0-drb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="centerX" secondItem="m5C-af-bRu" secondAttribute="centerX" id="06x-Rr-fan"/>
+                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="centerX" secondItem="m5C-af-bRu" secondAttribute="centerX" constant="-2" id="06x-Rr-fan"/>
+                            <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="WlS-6E-dff" secondAttribute="trailing" constant="269" id="1Uk-9E-J5t"/>
                             <constraint firstItem="vS0-Ew-olm" firstAttribute="leading" secondItem="m5C-af-bRu" secondAttribute="leadingMargin" constant="31" id="5yx-9f-nvI"/>
-                            <constraint firstAttribute="trailing" secondItem="WlS-6E-dff" secondAttribute="trailing" constant="181" id="Cd3-3b-8XC"/>
-                            <constraint firstItem="vS0-Ew-olm" firstAttribute="baseline" secondItem="WlS-6E-dff" secondAttribute="baseline" id="N0u-8m-mA8"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="baseline" secondItem="vS0-Ew-olm" secondAttribute="baseline" id="BYN-mM-WsP"/>
+                            <constraint firstItem="vS0-Ew-olm" firstAttribute="leading" secondItem="m5C-af-bRu" secondAttribute="leadingMargin" constant="31" id="KST-kx-4LV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pN8-ja-U0c" secondAttribute="trailing" constant="370" id="NNO-HS-Uz7"/>
                             <constraint firstItem="WlS-6E-dff" firstAttribute="leading" relation="lessThanOrEqual" secondItem="vS0-Ew-olm" secondAttribute="trailing" constant="23" id="TRE-zU-Caw"/>
-                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="vS0-Ew-olm" secondAttribute="bottom" constant="17" id="jAu-T7-6Tg"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="leading" secondItem="vS0-Ew-olm" secondAttribute="trailing" constant="13" id="Tcg-6c-tUC"/>
+                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="WlS-6E-dff" secondAttribute="bottom" constant="129" id="Vvw-kq-HY9"/>
+                            <constraint firstItem="pN8-ja-U0c" firstAttribute="leading" secondItem="m5C-af-bRu" secondAttribute="leadingMargin" constant="31" id="bKz-1t-5aY"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="trailing" secondItem="m5C-af-bRu" secondAttribute="trailingMargin" id="bwE-HG-03s"/>
+                            <constraint firstItem="pN8-ja-U0c" firstAttribute="leading" secondItem="vS0-Ew-olm" secondAttribute="leading" id="f1u-nq-nfY"/>
+                            <constraint firstItem="pN8-ja-U0c" firstAttribute="top" secondItem="vS0-Ew-olm" secondAttribute="bottom" constant="46" id="fVi-Cj-PPD"/>
+                            <constraint firstItem="pN8-ja-U0c" firstAttribute="top" secondItem="vS0-Ew-olm" secondAttribute="bottom" constant="46" id="fow-RK-UlB"/>
+                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="vS0-Ew-olm" secondAttribute="bottom" constant="128" id="jAu-T7-6Tg"/>
                             <constraint firstItem="t39-LX-qig" firstAttribute="top" secondItem="oUw-Ao-aSb" secondAttribute="bottom" constant="234" id="k2m-b5-Izf"/>
+                            <constraint firstItem="vS0-Ew-olm" firstAttribute="leading" secondItem="pN8-ja-U0c" secondAttribute="leading" id="ksj-7n-Bqd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WlS-6E-dff" secondAttribute="trailing" constant="157" id="mzY-T1-YPL"/>
-                            <constraint firstItem="WlS-6E-dff" firstAttribute="leading" secondItem="vS0-Ew-olm" secondAttribute="trailing" constant="67" id="r18-kd-NUD"/>
-                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="dbL-gN-8y8" secondAttribute="bottom" constant="223" id="yi5-ca-mJK"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="leading" secondItem="vS0-Ew-olm" secondAttribute="trailing" constant="13" id="rb0-if-ZR1"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="leading" secondItem="vS0-Ew-olm" secondAttribute="trailing" constant="13" id="vKO-rP-h4S"/>
+                            <constraint firstItem="pN8-ja-U0c" firstAttribute="top" secondItem="vS0-Ew-olm" secondAttribute="bottom" constant="46" id="vQj-2a-3mI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pN8-ja-U0c" secondAttribute="trailing" constant="370" id="vxs-Uy-dke"/>
+                            <constraint firstItem="vS0-Ew-olm" firstAttribute="top" secondItem="dbL-gN-8y8" secondAttribute="bottom" constant="176" id="w1P-Dr-h1X"/>
+                            <constraint firstItem="WlS-6E-dff" firstAttribute="top" secondItem="dbL-gN-8y8" secondAttribute="bottom" constant="175" id="wxn-bD-EBg"/>
+                            <constraint firstItem="t39-LX-qig" firstAttribute="top" secondItem="pN8-ja-U0c" secondAttribute="bottom" constant="298" id="yKW-Wk-dwP"/>
+                            <constraint firstItem="oUw-Ao-aSb" firstAttribute="top" secondItem="dbL-gN-8y8" secondAttribute="bottom" constant="334" id="yi5-ca-mJK"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="5yx-9f-nvI"/>
+                                <exclude reference="bKz-1t-5aY"/>
+                                <exclude reference="f1u-nq-nfY"/>
+                                <exclude reference="fow-RK-UlB"/>
+                                <exclude reference="vQj-2a-3mI"/>
+                                <exclude reference="vxs-Uy-dke"/>
+                                <exclude reference="BYN-mM-WsP"/>
                                 <exclude reference="TRE-zU-Caw"/>
+                                <exclude reference="Tcg-6c-tUC"/>
+                                <exclude reference="bwE-HG-03s"/>
                                 <exclude reference="mzY-T1-YPL"/>
+                                <exclude reference="vKO-rP-h4S"/>
+                                <exclude reference="jAu-T7-6Tg"/>
+                                <exclude reference="yKW-Wk-dwP"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="checkVerifiedButton" destination="pN8-ja-U0c" id="ovD-5a-UY4"/>
                         <outlet property="emailField" destination="vS0-Ew-olm" id="KtK-n1-NIx"/>
                     </connections>
                 </viewController>

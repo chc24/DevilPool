@@ -10,10 +10,13 @@ import UIKit
 import Parse
 
 class VerifyViewController: UIViewController {
-
+    
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var checkVerifiedButton: UIButton!
     
     @IBAction func verifyEmailPressed(sender: AnyObject) {
+        checkVerifiedButton.hidden = false
+        emailField.resignFirstResponder()
         if let email = emailField.text {
             PFUser.currentUser()?.setObject(email, forKey: "email")
             PFUser.currentUser()?.saveInBackground()
@@ -23,39 +26,52 @@ class VerifyViewController: UIViewController {
             self.presentViewController(alert, animated: true, completion: nil)
         }
         else {
-                    }
+            //empty field
+            println("empty field")
+        }
+    }
+    @IBAction func checkVerified(sender: AnyObject) {
+        
+        println("appeared")
+        var user = PFUser.currentUser()
+        user?.fetch()
+        if user!.objectForKey("emailVerified") as! Bool == true {
+           
+            self.performSegueWithIdentifier("VerifyToHomeView", sender: self)
+            
+        }
+        else {
+            var alert = UIAlertController(title: "Sorry, please try again", message: "Please click the confirmation link in your email", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        
     }
     
-    override func viewWillAppear(animated: Bool) {
-        var user = PFUser.currentUser()
-        if let verified = user!.objectForKey("emailVerified") as? Bool {
-            if verified == true {
-                self.performSegueWithIdentifier("verifyToHomeView", sender: self)
-            }
-        }
+    override func viewDidAppear(animated: Bool) {
+        
 
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        checkVerifiedButton.hidden = true
+                // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
