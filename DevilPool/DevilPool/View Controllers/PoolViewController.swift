@@ -11,7 +11,9 @@ import UIKit
 class PoolViewController: UIViewController {
 
     @IBOutlet weak var poolBarEnable: UITabBarItem!
+    @IBOutlet weak var postTableView: UITableView!
     
+    var queryResults : [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +28,12 @@ class PoolViewController: UIViewController {
             
             //display posts
             if let posts = posts as? [PFObject] {
-                println("posts not empty")
-                
                 for item in posts {
-                    println(item["fromUser"]!.username)
+                    self.queryResults.append(item)
                 }
+            println(self.queryResults.count)
                 
-                
-            
+            self.postTableView.reloadData()
             }
             
             
@@ -52,6 +52,8 @@ class PoolViewController: UIViewController {
             
         }
         println("query completed")
+        self.postTableView.delegate = self
+        self.postTableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,4 +72,33 @@ class PoolViewController: UIViewController {
     }
     */
 
+}
+
+extension PoolViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 50
+    }
+}
+
+extension PoolViewController: UITableViewDataSource {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return # of rows ie. query size
+        return queryResults.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("postResults", forIndexPath: indexPath) as! PostResultTableViewCell
+        
+        var dateFormatter = NSDateFormatter()
+        var current = queryResults[indexPath.row]
+        let onDate = current["onDate"] as! NSDate
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        cell.onDate.text = dateFormatter.stringFromDate(onDate)
+
+        return cell
+    }
+    
 }
