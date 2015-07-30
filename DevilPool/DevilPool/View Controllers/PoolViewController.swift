@@ -101,4 +101,20 @@ extension PoolViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        var current = queryResults[indexPath.row]
+        var relations = current["userPool"] as! PFRelation
+        
+        let x = relations.query()
+        x!.findObjectsInBackgroundWithBlock { (friends: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let friends = friends as? [PFUser]     {
+                for user in friends {
+                    println(user.username)
+                }
+            }
+        }
+
+    }
 }
