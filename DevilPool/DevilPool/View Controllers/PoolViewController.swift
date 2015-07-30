@@ -22,14 +22,25 @@ class PoolViewController: UIViewController {
         var query = PFQuery(className: "Post")
         query.whereKey("fromUser", equalTo: PFUser.currentUser()!)
         query.findObjectsInBackgroundWithBlock { (posts, error: NSError?) -> Void in
+            println("query callback")
             
             //display posts
+            if let posts = posts as? [PFObject] {
+                println("posts not empty")
+                
+                for item in posts {
+                    println(item["fromUser"]!.username)
+                }
+                
+                
+            
+            }
             
             
             
             //display no current posts
             
-        }
+        
         
         //Check if Current user has any posts or groups committed == query for posts
         
@@ -38,8 +49,9 @@ class PoolViewController: UIViewController {
         //Display Posts
         
         //Display Groups
-        
-        
+            
+        }
+        println("query completed")
     }
 
     override func didReceiveMemoryWarning() {
