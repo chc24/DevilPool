@@ -50,6 +50,7 @@ class Post: PFObject, PFSubclassing {
             
             if error == nil {
                 //Add User>Post Relation
+                PFUser.currentUser()!.fetch()
                 var user_relation = PFUser.currentUser()!.relationForKey("userPools")
                 user_relation.addObject(post)
                 PFUser.currentUser()!.saveInBackground()

@@ -130,7 +130,11 @@ extension SearchDestinationViewController: UITableViewDataSource {
             relation.addObject(user!)
             current.saveInBackground()
             
-            //ADD Post to Current User's Carpool
+            //ADD Post to Current User's Carpools
+            
+            let new_relation = user?.relationForKey("userPools")
+            new_relation?.addObject(current)
+            user?.saveInBackground()
             
             
 

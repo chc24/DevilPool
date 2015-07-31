@@ -10,4 +10,17 @@ import UIKit
 
 class ParseHelper: NSObject {
    
+    func uploadPost() {
+        return
+    }
+    
+    func updateUserCarpools() {
+        
+    }
+    
+    func updatePostsRelations() {
+        
+    }
+    
+    
 }

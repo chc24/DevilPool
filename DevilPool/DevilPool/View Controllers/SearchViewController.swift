@@ -21,7 +21,7 @@ class SearchViewController: UIViewController, DatePickerDelegate{
     
     @IBAction func uploadPost(sender: AnyObject) {
         
-        let post = Post()
+        //Query all posts and check for match.
         
         var timetoString = NSDateFormatter()
         
@@ -32,30 +32,59 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         timetoString.dateFormat = "MM/dd/yyyy"
         let onD = timetoString.dateFromString(onDateLabel.text)
         
-        //Create Post
+        let query = PFQuery(className: "Post")
+        query.whereKey("onDate", equalTo: onD!)
+        
+        query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let results = results as? [PFObject] {
+                if results.count == 0 {
+                    //No Results, upload a post
+                    let post = Post()
+                    post.onDate = onD
+                    post.fromTime = fT
+                    post.toTime = tT
+                    post.destination = self.destinationLabel.text
+                    
+                    if self.fromTimeLabel.text != "" && self.toTimeLabel.text != "" && self.destinationLabel.text != "" && self.onDateLabel.text  != ""{
+                        post.uploadPost()
+                        self.onDateLabel.text = ""
+                        self.fromTimeLabel.text = ""
+                        self.toTimeLabel.text = ""
+                        self.destinationLabel.text = ""
+                    }
+                    else {
+                        println("Fill in fields")
+                    }
+                    
+                } else {
+                    //We have matches - so present them.
+                    var dateFormatter = NSDateFormatter()
+                    dateFormatter.dateFormat = "MMM dd"
+                    for item in results {
+                        println("Carpool found on " + dateFormatter.stringFromDate(item["onDate"] as! NSDate))
+                    }
+                }
+                
+            } else { //Error
+                
+            }
+        }
+        
+        // Perform a Search among all posts > IF no match, then upload.
+        
+                        //Create Post
         
         //TODO
         
-        post.onDate = onD
-        post.fromTime = fT
-        post.toTime = tT
-        post.destination = destinationLabel.text
+        
         
         //Set read access rights
-        let acl = PFACL()
-        acl.setPublicReadAccess(true)
-        PFACL.setDefaultACL(acl, withAccessForCurrentUser: true)
         
-        if fromTimeLabel.text != "" && toTimeLabel.text != "" && destinationLabel.text != "" && onDateLabel.text  != ""{
-            post.uploadPost()
-            onDateLabel.text = ""
-            fromTimeLabel.text = ""
-            toTimeLabel.text = ""
-            destinationLabel.text = ""
-        }
-        else {
-            println("Fill in fields")
-        }
+        
+        
+        
+        
     }
     
     // Handles Date Picker

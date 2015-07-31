@@ -11,6 +11,7 @@
 		C320881B1B644DB800846F99 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C320881A1B644DB800846F99 /* FBSDKMessengerShareKit.framework */; };
 		C342B5CA1B5F411D00A96BE7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = C342B5C91B5F411D00A96BE7 /* Post.swift */; };
 		C34980881B6AB9590059D440 /* PostResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34980871B6AB9590059D440 /* PostResultTableViewCell.swift */; };
+		C349808A1B6C29FB0059D440 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34980891B6C29FA0059D440 /* DateHelper.swift */; };
 		C34B04511B61866200B0EC8B /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04501B61866200B0EC8B /* InitialViewController.swift */; };
 		C34B04531B6193BE00B0EC8B /* SearchDestinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */; };
 		C34B04561B61B64B00B0EC8B /* SearchResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34B04551B61B64B00B0EC8B /* SearchResultTableViewCell.swift */; };
@@ -65,6 +66,7 @@
 		C320881A1B644DB800846F99 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../../../../Documents/FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		C342B5C91B5F411D00A96BE7 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		C34980871B6AB9590059D440 /* PostResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PostResultTableViewCell.swift; path = Views/PostResultTableViewCell.swift; sourceTree = "<group>"; };
+		C34980891B6C29FA0059D440 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		C34B04501B61866200B0EC8B /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDestinationViewController.swift; sourceTree = "<group>"; };
 		C34B04551B61B64B00B0EC8B /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchResultTableViewCell.swift; path = Views/SearchResultTableViewCell.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			children = (
 				C357335D1B584F1E00193580 /* ParseLoginHelper.swift */,
 				C34B04571B62F43200B0EC8B /* ParseHelper.swift */,
+				C34980891B6C29FA0059D440 /* DateHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C349808A1B6C29FB0059D440 /* DateHelper.swift in Sources */,
 				C34980881B6AB9590059D440 /* PostResultTableViewCell.swift in Sources */,
 				C35733551B58460400193580 /* SearchViewController.swift in Sources */,
 				C357335E1B584F1E00193580 /* ParseLoginHelper.swift in Sources */,
