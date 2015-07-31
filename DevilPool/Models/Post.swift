@@ -49,7 +49,10 @@ class Post: PFObject, PFSubclassing {
             (success: Bool, error: NSError?) -> Void in
             
             if error == nil {
-                //
+                //Add User>Post Relation
+                var user_relation = PFUser.currentUser()!.relationForKey("userPools")
+                user_relation.addObject(post)
+                PFUser.currentUser()!.saveInBackground()
             } else {
                 println(error)
             }

@@ -119,16 +119,26 @@ extension SearchDestinationViewController: UITableViewDataSource {
         let message = "Ask " + username! + " if he wants to carpool!"
         var refreshAlert = UIAlertController(title: "Confirmation", message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
-        refreshAlert.addAction(UIAlertAction(title: "Message through Facebook", style: .Default, handler: { (action: UIAlertAction!) in
+        refreshAlert.addAction(UIAlertAction(title: "Request Carpool", style: .Default, handler: { (action: UIAlertAction!) in
             
+            //ADD PUSH NOTIFICATION HERE
+            
+            
+            //ADD NEW USER TO POSTER'S CARPOOL RELATION
             let user = PFUser.currentUser()
             let relation = current.relationForKey("userPool")
             relation.addObject(user!)
             current.saveInBackground()
             
-            let fbID = current["fromUser"] as! PFUser
-            let fburl = fbID["FacebookID"] as! String
-            var url = NSURL(string:"fb://profile/\(fburl)")
+            //ADD Post to Current User's Carpool
+            
+            
+
+            // FACEBOOK REDIRECT
+            
+//            let fbID = current["fromUser"] as! PFUser
+//            let fburl = fbID["FacebookID"] as! String
+//            var url = NSURL(string:"fb://profile/\(fburl)")
             
 //            if UIApplication.sharedApplication().canOpenURL(url!) {
 //                UIApplication.sharedApplication().openURL(url!)

@@ -21,23 +21,21 @@ class PoolViewController: UIViewController {
         
         //TODO : move to ParseHelper
         
-        var query = PFQuery(className: "Post")
-        query.whereKey("fromUser", equalTo: PFUser.currentUser()!)
-        query.findObjectsInBackgroundWithBlock { (posts, error: NSError?) -> Void in
-            println("query callback")
+        var myPools = PFUser.currentUser()!.relationForKey("userPools")
+        let find = myPools.query()
+        
+        find!.findObjectsInBackgroundWithBlock { (pools: [AnyObject]?, error: NSError?) -> Void in
             
-            //display posts
-            if let posts = posts as? [PFObject] {
-                for item in posts {
-                    self.queryResults.append(item)
-                }
-            println(self.queryResults.count)
-                
-            self.postTableView.reloadData()
+            if let pools = pools as? [PFObject]     {
+                self.queryResults = pools
             }
+            self.postTableView.reloadData()
+        }
+
+       
             
             
-            
+    
             //display no current posts
             
         
@@ -50,8 +48,8 @@ class PoolViewController: UIViewController {
         
         //Display Groups
             
-        }
-        println("query completed")
+        
+        
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
     }
