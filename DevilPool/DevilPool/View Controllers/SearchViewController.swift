@@ -59,6 +59,8 @@ class SearchViewController: UIViewController, DatePickerDelegate{
                     
                 } else {
                     //We have matches - so present them.
+                    
+                    //Matches can be the correct time range, or not
                     var dateFormatter = NSDateFormatter()
                     dateFormatter.dateFormat = "MMM dd"
                     for item in results {
@@ -210,6 +212,7 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         
     }
 }
+
 
 extension SearchViewController: UITextFieldDelegate {
     

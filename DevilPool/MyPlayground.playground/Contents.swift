@@ -4,11 +4,10 @@ import UIKit
 
 var str = "Hello, playground"
 
-if str.rangeOfString("playground") != nil{
-    println("exists")
-}
+let date = "August 02, 2015"
+let date2 = "August 02, 2015"
+var dateFormatter = NSDateFormatter()
 
-var a = true
-var b = false
+dateFormatter.dateFormat = "MMM dd, yyyy"
+println(dateFormatter.dateFromString(date))
 
-println(a && b)
