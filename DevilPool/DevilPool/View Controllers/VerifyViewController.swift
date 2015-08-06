@@ -21,7 +21,7 @@ class VerifyViewController: UIViewController {
         checkVerifiedButton.hidden = false
         emailField.resignFirstResponder()
         if let email = emailField.text {
-            if checkEmail(email) {
+            if verifyEmail(email) {
                 PFUser.currentUser()?.setObject(email, forKey: "email")
                 PFUser.currentUser()?.saveInBackground()
                 
@@ -36,7 +36,8 @@ class VerifyViewController: UIViewController {
         }
     }
     
-    func checkEmail(email: String) -> Bool {
+    
+    func verifyEmail(email: String) -> Bool {
         if email.rangeOfString("@duke.edu") != nil {
             return true
         }

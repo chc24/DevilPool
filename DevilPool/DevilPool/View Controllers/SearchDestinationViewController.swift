@@ -104,7 +104,6 @@ extension SearchDestinationViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
         var current = queryResults[indexPath.row] as PFObject
         var username = (current["fromUser"] as! PFUser).username
         var dateFormatter = NSDateFormatter()

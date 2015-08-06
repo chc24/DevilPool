@@ -7,11 +7,66 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
+import Parse
 
-class GearViewController: UIViewController {
+class GearViewController: UIViewController, FBSDKLoginButtonDelegate {
 
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var displayPicture: UIImageView!
+    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
+    
+    @IBAction func AboutButtonClicked(sender: AnyObject) {
+    }
+    @IBAction func FacebookButtonClicked(sender: AnyObject) {
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        if FBSDKAccessToken.currentAccessToken() == nil {
+            println("logged out")
+            
+            //Redirect to log in page
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Settings"
+        
+//        var loginButton = FBSDKLoginButton()
+//        loginButton.readPermissions = ["public_profile"]
+//        loginButton.center.x = self.view.center.x
+//        loginButton.center.y = self.view.center.y + 100
+//        
+//        loginButton.delegate = self
+//        
+//        self.view.addSubview(loginButton)
+        
+        
+        facebookButton.backgroundColor = UIColor.clearColor()
+        facebookButton.layer.cornerRadius = 5
+        facebookButton.layer.borderWidth = 1
+        facebookButton.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        self.username.text = PFUser.currentUser()?.username
+        
+        if let profileImage = PFUser.currentUser()?.valueForKey("profilePicture") as? PFFile {
+            
+            // TODO Add Local Storage for Profile Pictures.
+            
+            profileImage.getDataInBackgroundWithBlock { (data: NSData?, error: NSError?) -> Void in
+                if let data = data {
+                    let image = UIImage(data: data, scale:1.0)!
+                    
+                    self.displayPicture.image = image
+                    self.displayPicture.layer.masksToBounds = true
+                    self.displayPicture.layer.cornerRadius = self.displayPicture.frame.width/2
+                }
+            }
+        }
+
         
         // Do any additional setup after loading the view.
     }
@@ -25,6 +80,23 @@ class GearViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        
+        if error == nil{
+            println("User logged in")
+            self.performSegueWithIdentifier("FBLoginToTabs", sender: self)
+        }
+        else{
+            println(error.localizedDescription)
+        }
+        
+        
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        println("User logged out")
+    }
+
 
     /*
     // MARK: - Navigation

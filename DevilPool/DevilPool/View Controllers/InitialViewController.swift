@@ -16,8 +16,11 @@ class InitialViewController: UIViewController, DatePickerDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Find a Carpool"
         
         // Display Facebook Name / Profile Picture
+        
+        //MARK MOVE
         displayName.text = PFUser.currentUser()!.username
         
         if let profileImage = PFUser.currentUser()?.valueForKey("profilePicture") as? PFFile {
@@ -34,6 +37,7 @@ class InitialViewController: UIViewController, DatePickerDelegate{
                 }
             }
         }
+        
         
         // Do any additional setup after loading the view.
         

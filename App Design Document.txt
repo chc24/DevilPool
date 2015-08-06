@@ -68,9 +68,14 @@ Week of july 20
 Color Code Destinations
 
 Week of 27
+	-Core Functionality Missing:
 	-Push Notifications - Initial send , and receiving confirmation https://parse.com/questions/how-to-send-push-notification-to-a-specific-device-without-creating-channels
+	-Carpool System
+
+Week of 3
+	-Push Notifications
+	-UI
+	-dislpay results from search / finish searching alg
 	-
-	-refining code
-	-animations, UI Designs
 
 

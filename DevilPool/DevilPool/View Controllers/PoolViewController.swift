@@ -18,7 +18,7 @@ class PoolViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        self.title = "My Carpools"
         //TODO : move to ParseHelper
         
         var myPools = PFUser.currentUser()!.relationForKey("userPools")
@@ -90,6 +90,7 @@ extension PoolViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("postResults", forIndexPath: indexPath) as! PostResultTableViewCell
         
+        //MARK CHANGE
         var dateFormatter = NSDateFormatter()
         var current = queryResults[indexPath.row]
         let onDate = current["onDate"] as! NSDate
@@ -104,6 +105,7 @@ extension PoolViewController: UITableViewDataSource {
         var current = queryResults[indexPath.row]
         var relations = current["userPool"] as! PFRelation
         
+        //MARK MOVE
         let x = relations.query()
         x!.findObjectsInBackgroundWithBlock { (friends: [AnyObject]?, error: NSError?) -> Void in
             

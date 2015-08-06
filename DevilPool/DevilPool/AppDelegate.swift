@@ -13,7 +13,7 @@ import ParseUI
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDelegate {
     
     var window: UIWindow?
     var parseLoginHelper: ParseLoginHelper!
@@ -92,6 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             println("No current user")
             
             let loginViewController = PFLogInViewController()
+            
             
             //            var loginLogoTitle = UILabel()
             //            loginLogoTitle.text = "DevilPool"

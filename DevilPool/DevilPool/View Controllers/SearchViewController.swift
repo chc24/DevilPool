@@ -14,6 +14,8 @@ import QuartzCore
 
 class SearchViewController: UIViewController, DatePickerDelegate{
     
+    var dateHelper = DateHelper()
+    
     @IBOutlet weak var onDateLabel: UITextField!
     @IBOutlet weak var fromTimeLabel: UITextField!
     @IBOutlet weak var toTimeLabel: UITextField!
@@ -23,20 +25,17 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         
         //Query all posts and check for match.
         
-        var timetoString = NSDateFormatter()
+        //MARK CHANGE
+        let fT = dateHelper.makeLongDate(onDateLabel.text + ", " + fromTimeLabel.text)
+        let tT = dateHelper.makeLongDate(onDateLabel.text + ", " + toTimeLabel.text)
         
-        timetoString.dateFormat = "MM/dd/yyyy, hh:mm aa"
-        let fT = timetoString.dateFromString(onDateLabel.text + ", " + fromTimeLabel.text)
-        let tT = timetoString.dateFromString(onDateLabel.text + ", " + toTimeLabel.text)
+        let onD = dateHelper.makeShortDate(onDateLabel.text)
         
-        timetoString.dateFormat = "MM/dd/yyyy"
-        let onD = timetoString.dateFromString(onDateLabel.text)
         
-        let query = PFQuery(className: "Post")
-        query.whereKey("onDate", equalTo: onD!)
-        
-        query.findObjectsInBackgroundWithBlock { (results: [AnyObject]?, error: NSError?) -> Void in
-            
+        ParseHelper.findPostsOnDate(onD) { (results: [AnyObject]?, error: NSError?) -> Void in
+            if let error = error {
+                //error handling
+            }
             if let results = results as? [PFObject] {
                 if results.count == 0 {
                     //No Results, upload a post
@@ -58,9 +57,11 @@ class SearchViewController: UIViewController, DatePickerDelegate{
                     }
                     
                 } else {
-                    //We have matches - so present them.
-                    
+                    //We have matches - so present them in a pop up view that scrolls
+                    self.performSegueWithIdentifier("showResults", sender: self)
                     //Matches can be the correct time range, or not
+                    
+                    //MARK CHANGE
                     var dateFormatter = NSDateFormatter()
                     dateFormatter.dateFormat = "MMM dd"
                     for item in results {
@@ -72,6 +73,7 @@ class SearchViewController: UIViewController, DatePickerDelegate{
                 
             }
         }
+        
         
         // Perform a Search among all posts > IF no match, then upload.
         
@@ -166,10 +168,11 @@ class SearchViewController: UIViewController, DatePickerDelegate{
     }
     
     func handleDatePicker(sender: UIDatePicker) {
+        
+        //MARK EDIT
         var timeFormatter = NSDateFormatter()
         if tag == 3{
-            timeFormatter.dateFormat = "MMM dd, yyyy"
-            onDateLabel.text = timeFormatter.stringFromDate(sender.date)
+            onDateLabel.text = dateHelper.makeShortString(sender.date)
         }
         else {
             timeFormatter.dateFormat = "hh:mm aa"

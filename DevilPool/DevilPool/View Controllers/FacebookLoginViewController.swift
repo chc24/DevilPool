@@ -26,7 +26,7 @@ class FacebookLoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
         
         var loginButton = FBSDKLoginButton()
-        loginButton.readPermissions = ["public_profile", "user_friends"]
+        loginButton.readPermissions = ["public_profile"]
         loginButton.center = self.view.center
         
         loginButton.delegate = self

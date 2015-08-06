@@ -21,7 +21,9 @@ class DatePickerViewController: UIViewController, RSDFDatePickerViewDelegate, RS
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //MARK CHANGE
         
+        //MARK MOVE
         var query = PFQuery(className: "Post")
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
@@ -71,6 +73,8 @@ class DatePickerViewController: UIViewController, RSDFDatePickerViewDelegate, RS
     //Query Parse for Dates~
     
     func datePickerView(view: RSDFDatePickerView!, shouldMarkDate date: NSDate!) -> Bool {
+        
+        //MARK CHANGE
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         

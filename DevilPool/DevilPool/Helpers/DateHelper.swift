@@ -10,7 +10,7 @@ import UIKit
 
 class DateHelper: NSDateFormatter {
     
-    var helper: NSDateFormatter!
+    var helper: NSDateFormatter = NSDateFormatter()
     
     func makeShorterDate(make: String) -> NSDate{
         helper.dateFormat = "MMM dd"
