@@ -10,7 +10,12 @@ import UIKit
 
 class PostResultTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var onDate: UILabel!
+    @IBOutlet weak var fromTimeLabel: UILabel!
+    @IBOutlet weak var toTimeLabel: UILabel!
+    @IBOutlet weak var destinationLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

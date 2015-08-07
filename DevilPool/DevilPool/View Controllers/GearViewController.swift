@@ -17,6 +17,7 @@ class GearViewController: UIViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var displayPicture: UIImageView!
     @IBOutlet weak var facebookButton: UIButton!
     @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBAction func AboutButtonClicked(sender: AnyObject) {
     }
@@ -29,6 +30,8 @@ class GearViewController: UIViewController, FBSDKLoginButtonDelegate {
             //Redirect to log in page
             
         }
+    }
+    @IBAction func segmentedControlSwitched(sender: AnyObject) {
     }
     
     override func viewDidLoad() {

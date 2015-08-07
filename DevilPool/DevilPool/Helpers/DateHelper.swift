@@ -35,7 +35,21 @@ class DateHelper: NSDateFormatter {
     func makeShortString(make: NSDate) -> String{
         helper.dateFormat = "MMM dd, yyyy"
         return helper.stringFromDate(make)
-
+    }
+    
+    func makeShortTime(make: NSDate) -> String {
+        helper.dateFormat = "hh:mmaa"
+        return helper.stringFromDate(make)
+    }
+    
+    func getMonthFromDate(make: NSDate) -> String {
+        helper.dateFormat = "MMM"
+        return helper.stringFromDate(make)
+    }
+    
+    func getDateFromDate(make: NSDate) -> String {
+        helper.dateFormat = "dd"
+        return helper.stringFromDate(make)
     }
     
     //COMPARING DATES

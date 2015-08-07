@@ -44,6 +44,7 @@ class SearchDestinationViewController: UIViewController {
         self.destLabel.delegate = self
         self.searchResults.dataSource = self
         self.searchResults.delegate = self
+        self.searchResults.tableFooterView = UIView(frame: CGRectZero)
     }
 
     override func didReceiveMemoryWarning() {
