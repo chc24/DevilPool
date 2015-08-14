@@ -281,12 +281,12 @@
 				C34B04501B61866200B0EC8B /* InitialViewController.swift */,
 				C35733541B58460400193580 /* SearchViewController.swift */,
 				C3AA56A91B7D39F7005F1003 /* SearchResultsViewController.swift */,
+				C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */,
 				C35733561B58461F00193580 /* PoolViewController.swift */,
 				C35733581B58463400193580 /* GearViewController.swift */,
 				C35733611B58650100193580 /* FacebookLoginViewController.swift */,
 				C35736221B59CC2E00193580 /* VerifyViewController.swift */,
 				C35736261B5D674F00193580 /* DatePickerViewController.swift */,
-				C34B04521B6193BE00B0EC8B /* SearchDestinationViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

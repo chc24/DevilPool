@@ -8,6 +8,7 @@
 
 import Foundation
 import FBSDKCoreKit
+import FBSDKLoginKit
 import Parse
 import ParseUI
 
@@ -52,6 +53,7 @@ extension ParseLoginHelper : PFLogInViewControllerDelegate {
                 if let fbUsername = result?["name"] as? String {
                     // assign Facebook name to PFUser
                     println(result)
+                    
                     
                     let facebookID: String = result?["id"] as! String
                     let pictureURL = "https://graph.facebook.com/\(facebookID)/picture?type=large&return_ssl_resources=1"

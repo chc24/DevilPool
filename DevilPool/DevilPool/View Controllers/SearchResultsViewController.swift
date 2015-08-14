@@ -32,6 +32,9 @@ class SearchResultsViewController: UIViewController {
         //        self.view.setNeedsLayout()
         //        self.resultTableView.reloadData()
         
+        self.resultHeight.constant = CGFloat(results.count) * 75
+        self.view.setNeedsDisplay()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -87,7 +90,9 @@ extension SearchResultsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var current = results[indexPath.row] as PFObject
+        println(current)
         var user = current["fromUser"] as! PFUser
+        user.fetch()
         var username = user.username
         var dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "hh:mm aa"
@@ -107,16 +112,16 @@ extension SearchResultsViewController: UITableViewDataSource {
             
             
             //ADD NEW USER TO POSTER'S CARPOOL RELATION
-            let user = PFUser.currentUser()
+            let currentuser = PFUser.currentUser()
             let relation = current.relationForKey("userPool")
-            relation.addObject(user!)
+            relation.addObject(currentuser!)
             current.saveInBackground()
             
             //ADD Post to Current User's Carpools
             
-            let new_relation = user?.relationForKey("userPools")
+            let new_relation = currentuser?.relationForKey("userPools")
             new_relation?.addObject(current)
-            user?.saveInBackground()
+            currentuser?.saveInBackground()
             
             
             
@@ -124,11 +129,14 @@ extension SearchResultsViewController: UITableViewDataSource {
             
             let fbID = current["fromUser"] as! PFUser
             let fburl = fbID["FacebookID"] as! String
-            var url = NSURL(string:"fb://profile/\(fburl)")
+            let link = "fb://profile/" + fburl
+            let link2 = "fb://profile?app_scoped_user_id=" + fburl
+            var url = NSURL(string: link)
             
             if UIApplication.sharedApplication().canOpenURL(url!) {
-                UIApplication.sharedApplication().openURL(url!)
+                UIApplication.sharedApplication().openURL(NSURL(string: link2)!)
             } else {
+                println("opened in safari")
                 UIApplication.sharedApplication().openURL(NSURL(string: "https://www.facebook.com/\(fburl)")!)
             }
             
@@ -155,7 +163,7 @@ extension SearchResultsViewController: UITableViewDataSource {
 
 extension SearchResultsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 63
+        return 75
     }
     
 }

@@ -12,34 +12,51 @@ import Parse
 class VerifyViewController: UIViewController {
     
     @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var checkVerifiedButton: UIButton!
-    
     @IBOutlet weak var verifyButton: UIButton!
+    
+    @IBAction func beganEditing(sender: AnyObject) {
+        verifyButton.hidden = false
+    }
     @IBAction func verifyEmailPressed(sender: AnyObject) {
         
         //TODO move to ParseHelper
         
-        checkVerifiedButton.hidden = false
         emailField.resignFirstResponder()
         if let email = emailField.text {
             if verifyEmail(email) {
+                warningLabel.hidden = true
+                checkVerifiedButton.hidden = false
                 PFUser.currentUser()?.setObject(email, forKey: "email")
                 PFUser.currentUser()?.saveInBackground()
                 
                 var alert = UIAlertController(title: "Email Sent", message: "Please click the confirmation in your email", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
+                
+            }
+            else {
+                warningLabel.text = "Invalid Email"
+                warningLabel.hidden = false
             }
         }
         else {
             //empty field
-            println("empty field")
+            warningLabel.text = "Empty Fied"
+            warningLabel.hidden = true
         }
     }
-    
+    func stylizeButton(button: UIButton) {
+        button.backgroundColor = UIColor.clearColor()
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.whiteColor().CGColor
+    }
     
     func verifyEmail(email: String) -> Bool {
         if email.rangeOfString("@duke.edu") != nil {
+            println("True")
             return true
         }
         return false
@@ -53,14 +70,15 @@ class VerifyViewController: UIViewController {
         user?.fetchInBackgroundWithBlock({ (user, NSError) -> Void in
             
             if user!.objectForKey("emailVerified") as! Bool == true {
-                
-                self.performSegueWithIdentifier("VerifyToHomeView", sender: self)
+                println("verified!")
+                self.performSegueWithIdentifier("showHomeView", sender: self)
                 
             }
             else {
                 var alert = UIAlertController(title: "Sorry, please try again", message: "Please click the confirmation link in your email", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
+                println("asdf")
             }
             
         })
@@ -71,7 +89,12 @@ class VerifyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        warningLabel.hidden = true
+        verifyButton.hidden = true
         checkVerifiedButton.hidden = true
+        emailField.clearsOnBeginEditing = true
+        stylizeButton(verifyButton)
+        stylizeButton(checkVerifiedButton)
         // Do any additional setup after loading the view.
     }
     

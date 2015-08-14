@@ -16,9 +16,10 @@ class SearchDestinationViewController: UIViewController {
     @IBOutlet weak var destLabel: UITextField!
     @IBOutlet weak var searchResults: UITableView!
     @IBOutlet weak var searchResultsHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var noResultsLabel: UILabel!
     @IBOutlet weak var SearchButton: UIButton!
     var queryResults : [PFObject] = []
+    
     
     @IBAction func searchDestinations(sender: AnyObject) {
         destLabel.resignFirstResponder()
@@ -42,11 +43,16 @@ class SearchDestinationViewController: UIViewController {
                 }
                 
                 if self.queryResults.count != 0 {
+                    self.noResultsLabel.hidden = true
                     self.searchResults.reloadData()
-                    self.searchResultsHeight.constant = CGFloat(self.searchResults.visibleCells().count) * self.searchResults.rowHeight
+                    self.searchResultsHeight.constant = CGFloat(self.queryResults.count) * self.searchResults.rowHeight
                     self.view.setNeedsLayout()
 
                     self.searchResults.hidden = false
+                } else {
+                    self.noResultsLabel.text = "No results"
+                    self.noResultsLabel.hidden = false
+                    self.searchResults.hidden = true
                 }
                 //self.searchResults.reloadData()
                 
@@ -58,9 +64,12 @@ class SearchDestinationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Search by Destination"
         // Do any additional setup after loading the view.
         self.warningLabel.hidden = true
+        self.noResultsLabel.hidden = true
         self.destLabel.delegate = self
+        self.destLabel.clearsOnBeginEditing = true
         self.searchResults.dataSource = self
         self.searchResults.delegate = self
         self.searchResults.hidden = true
@@ -106,26 +115,28 @@ extension SearchDestinationViewController: UITableViewDataSource {
         //return # of rows ie. query size
         return queryResults.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("searchResults", forIndexPath: indexPath) as! SearchResultTableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        // Current Parse User on Row
+        let cell = tableView.dequeueReusableCellWithIdentifier("destinationResults", forIndexPath: indexPath) as! PostResultTableViewCell
+        var dateHelper = DateHelper()
+        //MARK CHANGE
         var current = queryResults[indexPath.row]
+        let parsedate = current["onDate"] as! NSDate
+        let month = dateHelper.getMonthFromDate(parsedate)
+        let day = dateHelper.getDateFromDate(parsedate)
+        let ft = current["fromTime"] as! NSDate
+        let tt = current["toTime"] as! NSDate
+        let destination = current["Destination"] as! String
         
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm aa"
-        
-        let fromDate = current["fromTime"] as! NSDate
-        let toDate = current["toTime"] as! NSDate
-        cell.searchFromTime.text = dateFormatter.stringFromDate(fromDate)
-        cell.searchToTime.text = dateFormatter.stringFromDate(toDate)
-        
-        let onDate = current["onDate"] as! NSDate
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        cell.searchToDate.text = dateFormatter.stringFromDate(onDate)
+        cell.monthLabel.text = month
+        cell.onDate.text = day
+        cell.fromTimeLabel.text = dateHelper.makeShortTime(ft)
+        cell.toTimeLabel.text = dateHelper.makeShortTime(tt)
+        cell.destinationLabel.text = destination
         
         return cell
     }
+
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

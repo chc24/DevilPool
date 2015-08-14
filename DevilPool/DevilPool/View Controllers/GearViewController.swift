@@ -11,7 +11,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import Parse
 
-class GearViewController: UIViewController, FBSDKLoginButtonDelegate {
+class GearViewController: UIViewController, FBSDKLoginButtonDelegate{
 
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var displayPicture: UIImageView!
@@ -27,7 +27,7 @@ class GearViewController: UIViewController, FBSDKLoginButtonDelegate {
         if FBSDKAccessToken.currentAccessToken() == nil {
             println("logged out")
             
-            //Redirect to log in page
+            //Redirect to custom log in page
             
         }
     }
@@ -98,7 +98,7 @@ class GearViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         println("User logged out")
-    }
+        }
 
 
     /*

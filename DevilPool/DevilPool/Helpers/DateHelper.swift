@@ -78,16 +78,17 @@ class DateHelper: NSDateFormatter {
         
         //Second contained within post / first/second contained within post
         if (second < tT) && !(second < fT) {
-            println("1")
             return true
         }
         
         //Opposite of First
         if first < tT && !(first < fT) {
-            println("2")
             return true
         }
         
+        if first < fT && tT < second {
+            return true
+        }
         else {
             return false
         }

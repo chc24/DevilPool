@@ -49,7 +49,8 @@ class SearchViewController: UIViewController, DatePickerDelegate{
             if let results = results as? [PFObject] {
                 
                 //filter out posts with incorrect timeslots
-                
+                println("found results")
+                println(results)
                 self.filteredArray = results.filter() {
                     if self.dateHelper.contains(fT, second: tT, third: ($0 as PFObject)){
                         return true
@@ -57,7 +58,8 @@ class SearchViewController: UIViewController, DatePickerDelegate{
                         return false
                     }
                 }
-                
+                println("filtered now")
+                println(self.filteredArray)
                 if self.filteredArray.count == 0 {
                     
                     //Ask if they want to upload a post
@@ -121,14 +123,12 @@ class SearchViewController: UIViewController, DatePickerDelegate{
             if let uinav: UINavigationController = segue.destinationViewController as? UINavigationController {
                 if let vc = uinav.viewControllers.first as? SearchResultsViewController {
                     vc.results = filteredArray
-                    println("done")
                 }
             }
-            // pass data to next view
         }
     }
-    // Handles Date Picker
     
+    // Handles Date Picker
     var tag = 0
 
     
@@ -223,7 +223,7 @@ class SearchViewController: UIViewController, DatePickerDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Create Post"
         // Do any additional setup after loading the view.
         
         self.destinationLabel.delegate = self

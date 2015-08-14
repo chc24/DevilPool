@@ -49,8 +49,9 @@ class PoolViewController: UIViewController {
         }
         else {
             emptyLabel.hidden = true
+            postTableView.hidden = false
         }
-        self.postTableViewHeight.constant = CGFloat(queryResults.count) * self.postTableView.rowHeight
+        self.postTableViewHeight.constant = CGFloat(queryResults.count) * 75
         self.view.setNeedsDisplay()
         
     }
@@ -65,6 +66,7 @@ class PoolViewController: UIViewController {
                 self.postTableView.reloadData()
                 self.redrawView()
                 
+                
             }
         })
         
@@ -72,7 +74,7 @@ class PoolViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         emptyLabel.hidden = true
-        
+        postTableView.hidden = true
         animator = UIDynamicAnimator(referenceView: view)
         
         self.title = "My Carpools"
