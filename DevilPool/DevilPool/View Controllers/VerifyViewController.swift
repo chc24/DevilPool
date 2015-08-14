@@ -14,6 +14,7 @@ class VerifyViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var checkVerifiedButton: UIButton!
     
+    @IBOutlet weak var verifyButton: UIButton!
     @IBAction func verifyEmailPressed(sender: AnyObject) {
         
         //TODO move to ParseHelper

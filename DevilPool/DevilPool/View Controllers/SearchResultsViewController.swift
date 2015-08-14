@@ -1,119 +1,82 @@
 //
-//  SearchDestinationViewController.swift
+//  SearchResultsViewController.swift
 //  DevilPool
 //
-//  Created by Administrator on 7/23/15.
+//  Created by Administrator on 8/13/15.
 //  Copyright (c) 2015 oncloudcal.com. All rights reserved.
 //
 
 import UIKit
-import Parse
-import FBSDKMessengerShareKit
 
-class SearchDestinationViewController: UIViewController {
+class SearchResultsViewController: UIViewController {
     
-    @IBOutlet weak var destLabel: UITextField!
-    @IBOutlet weak var searchResults: UITableView!
-    @IBOutlet weak var searchResultsHeight: NSLayoutConstraint!
+    var results: [PFObject] = []
+    @IBOutlet weak var resultTableView: UITableView!
+    @IBOutlet weak var resultHeight: NSLayoutConstraint!
     
-    var queryResults : [PFObject] = []
-    
-    @IBAction func searchDestinations(sender: AnyObject) {
-        destLabel.resignFirstResponder()
-        var query = PFQuery(className: "Post")
-        query.whereKey("Destination", containsString: destLabel.text)
-        query.includeKey("fromUser")
-        
-        query.findObjectsInBackgroundWithBlock { (dates: [AnyObject]?, error: NSError?) -> Void in
-            
-            if let dates = dates as? [PFObject]     {
-               
-                self.queryResults = dates
-                
-            }
-            
-            if self.queryResults.count != 0 {
-                self.searchResults.reloadData()
-                self.searchResultsHeight.constant = CGFloat(self.searchResults.visibleCells().count) * self.searchResults.rowHeight
-                self.view.setNeedsLayout()
-
-                self.searchResults.hidden = false
-            }
-            //self.searchResults.reloadData()
-            
-            
-        }
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //        self.resultHeight.constant = CGFloat(self.resultTableView.visibleCells().count) * self.resultTableView.rowHeight
+        //        self.view.setNeedsLayout()
+        //        self.resultTableView.reloadData()
+        
         // Do any additional setup after loading the view.
-        self.destLabel.delegate = self
-        self.searchResults.dataSource = self
-        self.searchResults.delegate = self
-        self.searchResults.hidden = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        self.view.endEditing(true)
-    }
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
     
-
 }
 
-extension SearchDestinationViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.destLabel.resignFirstResponder()
-        return true
-    }
-}
 
-extension SearchDestinationViewController: UITableViewDataSource {
+extension SearchResultsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return # of rows ie. query size
-        return queryResults.count
+        return results.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("searchResults", forIndexPath: indexPath) as! SearchResultTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("postResults", forIndexPath: indexPath) as! PostResultTableViewCell
         
         // Current Parse User on Row
-        var current = queryResults[indexPath.row]
+        var dateHelper = DateHelper()
+        //MARK CHANGE
+        var current = results[indexPath.row]
+        let parsedate = current["onDate"] as! NSDate
+        let month = dateHelper.getMonthFromDate(parsedate)
+        let day = dateHelper.getDateFromDate(parsedate)
+        let ft = current["fromTime"] as! NSDate
+        let tt = current["toTime"] as! NSDate
+        let destination = current["Destination"] as! String
         
-        var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "hh:mm aa"
-        
-        let fromDate = current["fromTime"] as! NSDate
-        let toDate = current["toTime"] as! NSDate
-        cell.searchFromTime.text = dateFormatter.stringFromDate(fromDate)
-        cell.searchToTime.text = dateFormatter.stringFromDate(toDate)
-        
-        let onDate = current["onDate"] as! NSDate
-        dateFormatter.dateFormat = "MMM dd, yyyy"
-        cell.searchToDate.text = dateFormatter.stringFromDate(onDate)
+        cell.monthLabel.text = month
+        cell.onDate.text = day
+        cell.fromTimeLabel.text = dateHelper.makeShortTime(ft)
+        cell.toTimeLabel.text = dateHelper.makeShortTime(tt)
+        cell.destinationLabel.text = destination
         
         return cell
     }
     
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        var current = queryResults[indexPath.row] as PFObject
+        var current = results[indexPath.row] as PFObject
         var user = current["fromUser"] as! PFUser
         var username = user.username
         var dateFormatter = NSDateFormatter()
@@ -121,7 +84,7 @@ extension SearchDestinationViewController: UITableViewDataSource {
         
         let fromDate = dateFormatter.stringFromDate(current["fromTime"] as! NSDate)
         let toDate = dateFormatter.stringFromDate(current["toTime"] as! NSDate)
-    
+        
         dateFormatter.dateFormat = "MMM dd, yyyy"
         let onDate = dateFormatter.stringFromDate(current["onDate"] as! NSDate)
         
@@ -146,7 +109,7 @@ extension SearchDestinationViewController: UITableViewDataSource {
             user?.saveInBackground()
             
             
-
+            
             // FACEBOOK REDIRECT
             
             let fbID = current["fromUser"] as! PFUser
@@ -169,11 +132,17 @@ extension SearchDestinationViewController: UITableViewDataSource {
         presentViewController(refreshAlert, animated: true, completion: nil)
         
     }
+    
+    @IBAction func dismissAction (sender : AnyObject?) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            
+        })
+    }
 }
 
 
 
-extension SearchDestinationViewController: UITableViewDelegate {
+extension SearchResultsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 63
     }

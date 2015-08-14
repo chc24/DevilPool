@@ -15,13 +15,22 @@ import QuartzCore
 class SearchViewController: UIViewController, DatePickerDelegate{
     
     var dateHelper = DateHelper()
+    var filteredArray: [PFObject] = []
     
     @IBOutlet weak var onDateLabel: UITextField!
     @IBOutlet weak var fromTimeLabel: UITextField!
     @IBOutlet weak var toTimeLabel: UITextField!
     @IBOutlet weak var destinationLabel: UITextField!
     
+    @IBOutlet weak var SearchButton: UIButton!
+    
     @IBAction func uploadPost(sender: AnyObject) {
+        
+        //Check if Fields are filled in\\
+        if self.fromTimeLabel.text == "" || self.toTimeLabel.text == "" || self.destinationLabel.text == "" || self.onDateLabel.text  == ""{
+            println("Fill in Fields")
+        }
+        
         
         //Query all posts and check for match.
         
@@ -32,41 +41,62 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         let onD = dateHelper.makeShortDate(onDateLabel.text)
         
         
+        //Search for posts
         ParseHelper.findPostsOnDate(onD) { (results: [AnyObject]?, error: NSError?) -> Void in
             if let error = error {
                 //error handling
             }
             if let results = results as? [PFObject] {
-                if results.count == 0 {
-                    //No Results, upload a post
-                    let post = Post()
-                    post.onDate = onD
-                    post.fromTime = fT
-                    post.toTime = tT
-                    post.destination = self.destinationLabel.text
+                
+                //filter out posts with incorrect timeslots
+                
+                self.filteredArray = results.filter() {
+                    if self.dateHelper.contains(fT, second: tT, third: ($0 as PFObject)){
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+                
+                if self.filteredArray.count == 0 {
                     
-                    if self.fromTimeLabel.text != "" && self.toTimeLabel.text != "" && self.destinationLabel.text != "" && self.onDateLabel.text  != ""{
+                    //Ask if they want to upload a post
+                    let message = "Sorry, no results were found."
+                    var Alert = UIAlertController(title: "Create Post", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                    
+                    //Yes
+                    Alert.addAction(UIAlertAction(title: "Create Posting", style: .Default, handler: { (action: UIAlertAction!) in
+                        let post = Post()
+                        post.onDate = onD
+                        post.fromTime = fT
+                        post.toTime = tT
+                        post.destination = self.destinationLabel.text
                         post.uploadPost()
                         self.onDateLabel.text = ""
                         self.fromTimeLabel.text = ""
                         self.toTimeLabel.text = ""
                         self.destinationLabel.text = ""
-                    }
-                    else {
-                        println("Fill in fields")
-                    }
+                        }))
+                    //No
+                    Alert.addAction(UIAlertAction(title: "Cancel", style: .Default, handler: { (action: UIAlertAction!) in
+                        println("Handle Cancel Logic here")
+                        
+                    }))
+                    self.presentViewController(Alert, animated: true, completion: nil)
+
                     
                 } else {
-                    //We have matches - so present them in a pop up view that scrolls
-                    self.performSegueWithIdentifier("showResults", sender: self)
+                    //We have matches - so present them in a table view
+                    //self.performSegueWithIdentifier("showResults", sender: self)
                     //Matches can be the correct time range, or not
+                    self.performSegueWithIdentifier("showResults", sender: self)
+//                    let uinav = self.storyboard?.instantiateViewControllerWithIdentifier("searchResultViewController") as? SearchResultsViewController
+//                    uinav?.results = self.filteredArray
+//                    self.presentViewController(uinav!, animated: true, completion: { () -> Void in
+//                    })
                     
-                    //MARK CHANGE
-                    var dateFormatter = NSDateFormatter()
-                    dateFormatter.dateFormat = "MMM dd"
-                    for item in results {
-                        println("Carpool found on " + dateFormatter.stringFromDate(item["onDate"] as! NSDate))
-                    }
+                    
+
                 }
                 
             } else { //Error
@@ -85,12 +115,18 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         
         //Set read access rights
         
-        
-        
-        
-        
     }
-    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "showResults") {
+            if let uinav: UINavigationController = segue.destinationViewController as? UINavigationController {
+                if let vc = uinav.viewControllers.first as? SearchResultsViewController {
+                    vc.results = filteredArray
+                    println("done")
+                }
+            }
+            // pass data to next view
+        }
+    }
     // Handles Date Picker
     
     var tag = 0
@@ -191,6 +227,10 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         // Do any additional setup after loading the view.
         
         self.destinationLabel.delegate = self
+        SearchButton.backgroundColor = UIColor.clearColor()
+        SearchButton.layer.cornerRadius = 5
+        SearchButton.layer.borderWidth = 1
+        SearchButton.layer.borderColor = UIColor.whiteColor().CGColor
         
         
     }

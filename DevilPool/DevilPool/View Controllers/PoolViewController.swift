@@ -35,6 +35,23 @@ class PoolViewController: UIViewController {
 ////        self.view.setNeedsLayout()
 //    }
     
+    @IBAction func RefreshButton(sender: AnyObject) {
+        populateTable()
+    }
+    func populateTable() {
+        ParseHelper.findUserPosts(PFUser.currentUser()!, completionBlock: { (results: [AnyObject]?, error: NSError?) -> Void in
+            
+            if let error = error {
+                //error handling
+            }
+            if let results = results as? [PFObject] {
+                self.queryResults = results
+            }
+        })
+        self.postTableView.reloadData()
+        self.postTableViewHeight.constant = CGFloat(self.postTableView.visibleCells().count) * self.postTableView.rowHeight
+        self.view.setNeedsLayout()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,26 +59,11 @@ class PoolViewController: UIViewController {
         
         self.title = "My Carpools"
         //TODO : move to ParseHelper
+        populateTable()
         
-        var myPools = PFUser.currentUser()!.relationForKey("userPools")
-        let find = myPools.query()
+        self.postTableView.delegate = self
+        self.postTableView.dataSource = self
         
-        find!.findObjectsInBackgroundWithBlock { [unowned self](pools: [AnyObject]?, error: NSError?) -> Void in
-            
-            if let pools = pools as? [PFObject]     {
-                self.queryResults = pools
-            }
-            
-            self.postTableView.reloadData()
-            self.postTableViewHeight.constant = CGFloat(self.postTableView.visibleCells().count) * self.postTableView.rowHeight
-            self.view.setNeedsLayout()
-        }
-        
-
-       
-            
-            
-    
             //display no current posts
             
         
@@ -69,15 +71,6 @@ class PoolViewController: UIViewController {
         //Check if Current user has any posts or groups committed == query for posts
         
         
-        
-        //Display Posts
-        
-        //Display Groups
-            
-        
-        
-        self.postTableView.delegate = self
-        self.postTableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -182,7 +175,7 @@ extension PoolViewController: UITableViewDataSource {
         var current = queryResults[indexPath.row]
         var relations = current["userPool"] as! PFRelation
         
-        self.presentTransaction()
+//        self.presentTransaction()
 //        //MARK MOVE
 //        let x = relations.query()
 //        x!.findObjectsInBackgroundWithBlock { (friends: [AnyObject]?, error: NSError?) -> Void in

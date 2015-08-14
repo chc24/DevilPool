@@ -13,7 +13,7 @@ class ParseHelper {
    
     //Post Class
     static let PostClass = "Post"
-    static let PostOnDate = "onDatE"
+    static let PostOnDate = "onDate"
     static let PostUser = "fromUser"
     static let PostFromTime = "fromTime"
     static let PostToTime = "toTime"
@@ -50,13 +50,20 @@ class ParseHelper {
     
     static func findPostsOnDate(date: NSDate, completionBlock: PFArrayResultBlock) {
         var query = PFQuery(className: PostClass)
-        query.whereKey("onDate", equalTo: date)
+        query.whereKey(PostOnDate, equalTo: date)
         query.findObjectsInBackgroundWithBlock(completionBlock)
     }
     
-    static func findAllRelations() {
+    static func findUserPosts(user: PFUser, completionBlock: PFArrayResultBlock) {
+        var myPools = user.relationForKey(UserCarpools)
+        let query = myPools.query()
         
+        query!.findObjectsInBackgroundWithBlock(completionBlock)
+            
     }
+
+        
+    
     
     
     

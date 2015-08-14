@@ -72,6 +72,26 @@ class DateHelper: NSDateFormatter {
         return (first == second)
     }
     
+    func contains(first: NSDate, second: NSDate, third: PFObject) -> Bool{
+        let fT = third["fromTime"] as! NSDate
+        let tT = third["toTime"] as! NSDate
+        
+        //Second contained within post / first/second contained within post
+        if (second < tT) && !(second < fT) {
+            println("1")
+            return true
+        }
+        
+        //Opposite of First
+        if first < tT && !(first < fT) {
+            println("2")
+            return true
+        }
+        
+        else {
+            return false
+        }
+    }
 }
 
 public func ==(lhs: NSDate, rhs: NSDate) -> Bool {
