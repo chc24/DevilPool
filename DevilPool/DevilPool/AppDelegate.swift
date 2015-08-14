@@ -78,6 +78,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
             
             //email is verified
             if user!.objectForKey("emailVerified") as! Bool == true {
+                
+                //Load View Controllers
+                
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 startViewController = storyboard.instantiateViewControllerWithIdentifier("HomeView") as! UITabBarController
             }
@@ -86,6 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 startViewController = storyboard.instantiateViewControllerWithIdentifier("Verify") as! UIViewController
             }
+            
+            
             
             //WE DO NOT HAVE A USER
         } else {
