@@ -9,7 +9,7 @@
 import UIKit
 
 class PoolViewController: UIViewController {
-
+    
     @IBOutlet weak var poolBarEnable: UITabBarItem!
     @IBOutlet weak var postTableView: UITableView!
     @IBOutlet weak var postTableViewHeight: NSLayoutConstraint!
@@ -25,18 +25,23 @@ class PoolViewController: UIViewController {
     var dynamicItemBehavior: UIDynamicItemBehavior!
     var gestureRecognizer: UIPanGestureRecognizer!
     var gravityBehavior: UIGravityBehavior!
-
+    
     var queryResults : [PFObject] = []
     
     
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//        postTableViewHeight.constant = CGFloat(postTableView.visibleCells().count) * postTableView.rowHeight
-////        self.view.setNeedsLayout()
-//    }
+    //    override func viewWillLayoutSubviews() {
+    //        super.viewWillLayoutSubviews()
+    //        postTableViewHeight.constant = CGFloat(postTableView.visibleCells().count) * postTableView.rowHeight
+    ////        self.view.setNeedsLayout()
+    //    }
     
     @IBAction func RefreshButton(sender: AnyObject) {
         populateTable()
+    }
+    
+    func redrawView() {
+        self.postTableViewHeight.constant = CGFloat(queryResults.count) * self.postTableView.rowHeight
+        self.view.setNeedsDisplay()
     }
     func populateTable() {
         ParseHelper.findUserPosts(PFUser.currentUser()!, completionBlock: { (results: [AnyObject]?, error: NSError?) -> Void in
@@ -46,11 +51,12 @@ class PoolViewController: UIViewController {
             }
             if let results = results as? [PFObject] {
                 self.queryResults = results
+                self.postTableView.reloadData()
+                self.redrawView()
+                
             }
         })
-        self.postTableView.reloadData()
-        self.postTableViewHeight.constant = CGFloat(self.postTableView.visibleCells().count) * self.postTableView.rowHeight
-        self.view.setNeedsLayout()
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,33 +65,34 @@ class PoolViewController: UIViewController {
         
         self.title = "My Carpools"
         //TODO : move to ParseHelper
-        populateTable()
+        
         
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
+        populateTable()
         
-            //display no current posts
-            
+        //display no current posts
+        
         
         
         //Check if Current user has any posts or groups committed == query for posts
         
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
     
@@ -130,8 +137,8 @@ class PoolViewController: UIViewController {
                 self.animator.addBehavior(self.snapBehavior)
         })
     }
-
-
+    
+    
 }
 
 extension PoolViewController: UITableViewDelegate {
@@ -175,17 +182,17 @@ extension PoolViewController: UITableViewDataSource {
         var current = queryResults[indexPath.row]
         var relations = current["userPool"] as! PFRelation
         
-//        self.presentTransaction()
-//        //MARK MOVE
-//        let x = relations.query()
-//        x!.findObjectsInBackgroundWithBlock { (friends: [AnyObject]?, error: NSError?) -> Void in
-//            
-//            if let friends = friends as? [PFUser]     {
-//                for user in friends {
-//                    println(user.username)
-//                }
-//            }
-//        }
-
+        //        self.presentTransaction()
+        //        //MARK MOVE
+        //        let x = relations.query()
+        //        x!.findObjectsInBackgroundWithBlock { (friends: [AnyObject]?, error: NSError?) -> Void in
+        //
+        //            if let friends = friends as? [PFUser]     {
+        //                for user in friends {
+        //                    println(user.username)
+        //                }
+        //            }
+        //        }
+        
     }
 }
