@@ -12,36 +12,46 @@ import FBSDKMessengerShareKit
 
 class SearchDestinationViewController: UIViewController {
     
+    @IBOutlet weak var warningLabel: UILabel!
     @IBOutlet weak var destLabel: UITextField!
     @IBOutlet weak var searchResults: UITableView!
     @IBOutlet weak var searchResultsHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var SearchButton: UIButton!
     var queryResults : [PFObject] = []
     
     @IBAction func searchDestinations(sender: AnyObject) {
         destLabel.resignFirstResponder()
-        var query = PFQuery(className: "Post")
-        query.whereKey("Destination", containsString: destLabel.text)
-        query.includeKey("fromUser")
-        
-        query.findObjectsInBackgroundWithBlock { (dates: [AnyObject]?, error: NSError?) -> Void in
+        if destLabel.text == "" {
+            warningLabel.text = "Empty Field"
+            warningLabel.hidden = false
+        }
+        else {
+        //MARK Move
+            warningLabel.hidden = true
+            var query = PFQuery(className: "Post")
+            query.whereKey("Destination", containsString: destLabel.text)
+            query.includeKey("fromUser")
             
-            if let dates = dates as? [PFObject]     {
-               
-                self.queryResults = dates
+            query.findObjectsInBackgroundWithBlock { (dates: [AnyObject]?, error: NSError?) -> Void in
+                
+                if let dates = dates as? [PFObject]     {
+                   
+                    self.queryResults = dates
+                    
+                }
+                
+                if self.queryResults.count != 0 {
+                    self.searchResults.reloadData()
+                    self.searchResultsHeight.constant = CGFloat(self.searchResults.visibleCells().count) * self.searchResults.rowHeight
+                    self.view.setNeedsLayout()
+
+                    self.searchResults.hidden = false
+                }
+                //self.searchResults.reloadData()
+                
                 
             }
-            
-            if self.queryResults.count != 0 {
-                self.searchResults.reloadData()
-                self.searchResultsHeight.constant = CGFloat(self.searchResults.visibleCells().count) * self.searchResults.rowHeight
-                self.view.setNeedsLayout()
-
-                self.searchResults.hidden = false
-            }
-            //self.searchResults.reloadData()
-            
-            
         }
         
     }
@@ -49,10 +59,16 @@ class SearchDestinationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.warningLabel.hidden = true
         self.destLabel.delegate = self
         self.searchResults.dataSource = self
         self.searchResults.delegate = self
         self.searchResults.hidden = true
+        
+        SearchButton.backgroundColor = UIColor.clearColor()
+        SearchButton.layer.cornerRadius = 5
+        SearchButton.layer.borderWidth = 1
+        SearchButton.layer.borderColor = UIColor.whiteColor().CGColor
     }
 
     override func didReceiveMemoryWarning() {

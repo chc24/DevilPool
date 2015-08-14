@@ -10,6 +10,7 @@ import UIKit
 
 class PoolViewController: UIViewController {
     
+    @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var poolBarEnable: UITabBarItem!
     @IBOutlet weak var postTableView: UITableView!
     @IBOutlet weak var postTableViewHeight: NSLayoutConstraint!
@@ -40,8 +41,18 @@ class PoolViewController: UIViewController {
     }
     
     func redrawView() {
+        
+        if queryResults.count == 0 {
+            emptyLabel.text = "No current Carpools"
+            emptyLabel.hidden = false
+            
+        }
+        else {
+            emptyLabel.hidden = true
+        }
         self.postTableViewHeight.constant = CGFloat(queryResults.count) * self.postTableView.rowHeight
         self.view.setNeedsDisplay()
+        
     }
     func populateTable() {
         ParseHelper.findUserPosts(PFUser.currentUser()!, completionBlock: { (results: [AnyObject]?, error: NSError?) -> Void in
@@ -60,6 +71,7 @@ class PoolViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        emptyLabel.hidden = true
         
         animator = UIDynamicAnimator(referenceView: view)
         
@@ -70,6 +82,7 @@ class PoolViewController: UIViewController {
         self.postTableView.delegate = self
         self.postTableView.dataSource = self
         populateTable()
+        
         
         //display no current posts
         
@@ -144,12 +157,31 @@ class PoolViewController: UIViewController {
 extension PoolViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 86
+        return 75
     }
 }
 
 extension PoolViewController: UITableViewDataSource {
     
+//    func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+//        return true
+//    }
+//    
+//    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+//        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+//            // handle delete (by removing the data from your array and updating the tableview)
+//        }
+//    }
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            //delete from parse
+            println("deleted")
+        }
+    }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return # of rows ie. query size
         return queryResults.count

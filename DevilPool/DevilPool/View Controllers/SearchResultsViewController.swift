@@ -13,10 +13,20 @@ class SearchResultsViewController: UIViewController {
     var results: [PFObject] = []
     @IBOutlet weak var resultTableView: UITableView!
     @IBOutlet weak var resultHeight: NSLayoutConstraint!
-    
+    @IBOutlet weak var numResultLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if results.count > 1 {
+            numResultLabel.text = String(results.count) + " results:"
+        }
+        else if results.count == 0 {
+            numResultLabel.text = String(results.count) + "results"
+        }
+        else {
+            numResultLabel.text = String(results.count) + " result"
+        }
         
         //        self.resultHeight.constant = CGFloat(self.resultTableView.visibleCells().count) * self.resultTableView.rowHeight
         //        self.view.setNeedsLayout()
@@ -93,7 +103,7 @@ extension SearchResultsViewController: UITableViewDataSource {
         
         refreshAlert.addAction(UIAlertAction(title: "Request Carpool", style: .Default, handler: { (action: UIAlertAction!) in
             
-            //ADD PUSH NOTIFICATION HERE
+            //TODO ADD PUSH NOTIFICATION HERE
             
             
             //ADD NEW USER TO POSTER'S CARPOOL RELATION
@@ -110,7 +120,7 @@ extension SearchResultsViewController: UITableViewDataSource {
             
             
             
-            // FACEBOOK REDIRECT
+            //FACEBOOK REDIRECT
             
             let fbID = current["fromUser"] as! PFUser
             let fburl = fbID["FacebookID"] as! String
@@ -133,6 +143,7 @@ extension SearchResultsViewController: UITableViewDataSource {
         
     }
     
+    //Cancel Results
     @IBAction func dismissAction (sender : AnyObject?) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             
