@@ -41,7 +41,7 @@ class PoolViewController: UIViewController {
     }
     
     func redrawView() {
-        
+    
         if queryResults.count == 0 {
             emptyLabel.text = "No current Carpools"
             emptyLabel.hidden = false
@@ -71,6 +71,7 @@ class PoolViewController: UIViewController {
         })
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         emptyLabel.hidden = true
@@ -100,17 +101,7 @@ class PoolViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-    
+    //TODO Present Card View
     func presentTransaction() {
         // Add gesture recognizer to detect touches
         gestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
@@ -165,15 +156,6 @@ extension PoolViewController: UITableViewDelegate {
 
 extension PoolViewController: UITableViewDataSource {
     
-//    func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-//        return true
-//    }
-//    
-//    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-//        if (editingStyle == UITableViewCellEditingStyle.Delete) {
-//            // handle delete (by removing the data from your array and updating the tableview)
-//        }
-//    }
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }

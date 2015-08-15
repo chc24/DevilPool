@@ -121,10 +121,12 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         else if tag == 2{
             toTimeLabel.resignFirstResponder()
         }
-        else {
+        else if tag == 3{
             onDateLabel.resignFirstResponder()
         }
-        
+        else {
+            destinationLabel.resignFirstResponder()
+        }
     }
     
     //Text Field Action Items
@@ -140,7 +142,9 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         tag = 2
         makeDatePicker(sender)
     }
-    
+    @IBAction func destinationLabelTouched(sender: UITextField!) {
+        tag = 4
+    }
     // Handles Date Picker
     func makeDatePicker(sender: UITextField!) {
         
@@ -216,7 +220,6 @@ class SearchViewController: UIViewController, DatePickerDelegate{
         self.title = "Create Post"
         self.warningLabel.text = "Fill in all fields"
         self.warningLabel.hidden = true
-        self.destinationLabel.delegate = self
         
         SearchButton.backgroundColor = UIColor.clearColor()
         SearchButton.layer.cornerRadius = 5
@@ -236,13 +239,5 @@ class SearchViewController: UIViewController, DatePickerDelegate{
     // MARK: - DatePickerDelegate (Do nothing)
     func didSelectDate(date: NSDate!) {
         //Do nothing
-    }
-}
-
-extension SearchViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.destinationLabel.resignFirstResponder()
-        return true
     }
 }

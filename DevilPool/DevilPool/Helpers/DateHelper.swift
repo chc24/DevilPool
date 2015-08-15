@@ -12,6 +12,7 @@ class DateHelper: NSDateFormatter {
     
     var helper: NSDateFormatter = NSDateFormatter()
     
+    //Date Formats
     func makeShorterDate(make: String) -> NSDate{
         helper.dateFormat = "MMM dd"
         return helper.dateFromString(make)!
@@ -58,13 +59,10 @@ class DateHelper: NSDateFormatter {
     }
     
     //COMPARING DATES
-    
-    //IF first is behind of second
     func isBehind(first: NSDate, second: NSDate) -> Bool{
         return (first < second)
     }
-    
-    //IF first is ahead of second
+
     func isAhead(first: NSDate, second: NSDate) -> Bool {
         if !(first < second) {
             return true
@@ -72,7 +70,6 @@ class DateHelper: NSDateFormatter {
         return false
     }
     
-    //If they're on same day (excluding time)
     func isSameDay(first: NSDate, second: NSDate) -> Bool{
         return (first == second)
     }
