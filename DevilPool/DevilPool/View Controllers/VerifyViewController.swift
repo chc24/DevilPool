@@ -37,6 +37,7 @@ class VerifyViewController: UIViewController {
                 
             }
             else {
+                checkVerifiedButton.hidden = true
                 warningLabel.text = "Invalid Email"
                 warningLabel.hidden = false
             }

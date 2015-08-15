@@ -27,6 +27,11 @@ class DateHelper: NSDateFormatter {
         return helper.dateFromString(make)!
     }
     
+    func makeShortestString(make: NSDate) -> String {
+        helper.dateFormat = "hh:mm aa"
+        return helper.stringFromDate(make)
+    }
+    
     func makeShorterString(make: NSDate) -> String {
         helper.dateFormat = "MMM dd"
         return helper.stringFromDate(make)

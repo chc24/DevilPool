@@ -28,14 +28,8 @@ class SearchResultsViewController: UIViewController {
             numResultLabel.text = String(results.count) + " result"
         }
         
-        //        self.resultHeight.constant = CGFloat(self.resultTableView.visibleCells().count) * self.resultTableView.rowHeight
-        //        self.view.setNeedsLayout()
-        //        self.resultTableView.reloadData()
-        
         self.resultHeight.constant = CGFloat(results.count) * 75
         self.view.setNeedsDisplay()
-        
-        // Do any additional setup after loading the view.
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,9 +78,7 @@ extension SearchResultsViewController: UITableViewDataSource {
         
         return cell
     }
-    
-    
-    
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         var current = results[indexPath.row] as PFObject

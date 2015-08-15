@@ -98,14 +98,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PFLogInViewControllerDele
             
             let loginViewController = PFLogInViewController()
             
+
+            var loginLogoTitle = UILabel()
+            loginLogoTitle.text = "Welcome to Crazy Carpool!"
+            loginLogoTitle.textColor = UIColor(white: 1.0, alpha: 1.0)
+            loginLogoTitle.font = UIFont(name: loginLogoTitle.font.fontName,size: 24)
             
-            //            var loginLogoTitle = UILabel()
-            //            loginLogoTitle.text = "DevilPool"
-            //            loginViewController.logInView!.logo = loginLogoTitle
+            var frame: CGRect = loginLogoTitle.frame
+            frame.origin.y = 10 //pass the cordinate which you want
+            frame.origin.x = 12 //pass the cordinate which you want
+            loginLogoTitle.frame = frame
+            
             
             loginViewController.fields =  .Facebook
             loginViewController.delegate = parseLoginHelper
-            
+            loginViewController.logInView!.logo = loginLogoTitle
+            loginViewController.logInView!.backgroundColor = UIColor(red: 0, green: 16/255, blue: 66/255, alpha: 1.0)
             startViewController = loginViewController
         }
         
